@@ -224,11 +224,11 @@ input {
 }
 
 #page_headersearch {
-    padding-right: 30px;
+    padding-right: 10px;
     /*	padding-top: 25px;*/
     float: right;
     clear: right;
-    width: 280px;
+/*    width: 340px;*/
     text-align: left;
     word-spacing: -1px;
     overflow : hidden;
@@ -276,11 +276,11 @@ input {
     color: #565691;
 
 
-    -moz-border-radius: .5em;
-    -ms-border-radius: .5em;
-    -o-border-radius: .5em;
-    -webkit-border-radius: .5em;
-    border-radius: .5em;
+    -moz-border-radius: .3em;
+    -ms-border-radius: .3em;
+    -o-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
 
     /*    behavior: url(/css/PIE/PIE.php);*/
     /*    behavior: url(C:/wamp/www/crt2/css/PIE/PIE.php);*/
@@ -427,15 +427,16 @@ input {
 /* Main Content Area */
 
 #main_content {
-    margin-right: 2px;
+    margin-right: auto;
+    margin-left: auto;
     width: 574px;
     height: 500px;
-    text-align: center;
+    font-size: 14px;
     float: left;
 }
 
 #main_content .topic {
-    margin: 3px 1px 3px 1px;
+    margin: 3px auto 3px auto;
     border: 1px solid #808080;
     width: 98%;
     height: 100px;
@@ -451,8 +452,13 @@ input {
     background-color: #D0D0D0;
     font-size: medium;
     text-align: left;
+    margin-left: 1px;
 }
 
+#main_content .topic_body {
+    text-align: left;
+    margin-left: 1px;
+}    
 #main_content table {
     width: 99%;
     margin-top: 1px;
@@ -491,11 +497,18 @@ input {
 
 #right_sidebar table{
     width: 100%;
+    font-size: medium;
 }
 
 #right_sidebar th{
-    font-size: medium;
-    background-color: #A0A0A0;
+    
+    background: #808080;
+    background: -moz-linear-gradient(top, #808080, #B0B0B0);
+    background: -ms-linear-gradient(top, #808080, #B0B0B0);
+    background: -o-linear-gradient(top, #808080, #B0B0B0);
+    background: -webkit-linear-gradient(top, #808080, #B0B0B0);
+    background: linear-gradient(top, #808080, #B0B0B0);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#808080', EndColorStr='#B0B0B0');
     color: #FFFFFF;
     -moz-border-radius: .2em .2em 0em 0em;
     -ms-border-radius: .2em .2em 0em 0em;

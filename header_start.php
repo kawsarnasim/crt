@@ -28,20 +28,29 @@
                 if(e.style.display == 'inline')
                     e.style.display = 'none';
             }
+            function search() {
+                alert('Search not activated yet');
+            }
+            function login() {
+                document.location =  'login.php';
+            }
+            function logout() {
+                document.location =  'logout.php';
+            }
         </script>
     </head>
 
     <body>
 
-        <div id="container">
+        <div id="container" align="center">
 
             <!-- Start of Page Header -->
 
             <div id="page_header">
 
                 <div id="page_heading">
-                    <img src="images/crtheading.png" height="150px" width="825px"/>
-                    <img id="globe" src="images/spinning_globe.gif" height="125px" width="125px"/>
+                    <img src="images/heading/crtheading.png" height="150px" width="825px"/>
+                    <img id="globe" src="images/heading/spinning_globe.gif" height="125px" width="125px"/>
                 </div>
 
                 <div class="clearthis">&nbsp;</div>

@@ -6,7 +6,7 @@
     <div class="topic_head">
         Vision
     </div>
-    <div>
+    <div class="topic_body">
         Creating a better world by working for a richer economy.
     </div>
 </div>
