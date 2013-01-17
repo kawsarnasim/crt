@@ -1,4 +1,4 @@
 crt
 ===
 
-Center for Research &amp; Training (CRTTTWWWW)
+Center for Research &amp; Training (CRT)
