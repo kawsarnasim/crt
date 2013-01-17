@@ -24,3 +24,13 @@ Create Table users (
         REFERENCES usertypes(userTypeId)
         ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
+
+#Table Notice:
+CREATE  TABLE notices (
+  id_notice BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  notice_title VARCHAR(45) NULL ,
+  notice_text VARCHAR(45) NULL ,
+  creationdatetime DATE NOT NULL,
+  lastupdatedatetime DATE NOT NULL,
+  PRIMARY KEY (`id_notice`)
+)ENGINE=InnoDB;

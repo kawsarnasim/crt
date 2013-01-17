@@ -14,8 +14,10 @@
 
         <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="css/photoflash.css"/>
-
+        <link rel="stylesheet" href="css/cupertino/jquery-ui-1.8.23.custom.css" />
+        
         <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+        <script src="js/jquery-ui-1.8.23.custom.min.js"></script>
         <script type="text/javascript" src="js/header-image-slide.js"></script>
 
         <script type="text/javascript">
@@ -72,7 +74,7 @@
                     <li><a href="views/staff.php">Staff</a></li>
                     <li><a href="views/advisors.php">Advisors</a></li>
                     <li><a href="views/webmail.php">Webmail</a></li>
-                    <li class="last"><a href="register.php">Registration</a></li>
+                    <li class="last"><a href="register.php">Online Registration</a></li>
                 </ul>
 
             </div>

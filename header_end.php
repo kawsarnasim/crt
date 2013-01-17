@@ -69,6 +69,25 @@
         <div><a href="#">Vacancy</a></div>
         <div><a href="#">Press</a></div>
         <div><a href="#">Photo Gallery</a></div>
+        <?php
+        if($usertype==1) {
+        ?>
+            <div>
+                <a  onclick="javascript:toggle_visibility('admin_panel')">Admin Panel</a><br />
+                <div style="display: inline;" id="admin_panel">
+                    <ul>
+                        <li>
+                            <a href="noticesettings.php">Notice Settings</a>
+                        </li>
+                        <li>
+                            <a href="publicationsettings.php">Publication Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
         <div><a href="#">Downloads</a></div>
         <?php
         if ($usertype == 1 || $usertype == 2) {
