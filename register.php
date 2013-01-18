@@ -1,6 +1,9 @@
 <?php
 include 'header2.php';
 ?>
+<!-- Start of Main Content Area -->
+
+<div id="main_content" align="center">
 
 <?PHP
 //require_once("./include/membersite_config.php");

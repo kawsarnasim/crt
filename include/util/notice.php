@@ -21,21 +21,23 @@ class Notice extends DBConnect{
      * Create a new Notice in the Database.
      */
     function createNotice($title, $text) {
-        
+        $id_notice = 0;
         $this->connection=$this->ConnectDB();
         
         if($this->connection==NULL) {
-            return FALSE;
+            return $id_notice;
         }
         
         $qry =  "insert into notices (notice_title, notice_text, creationdatetime, lastupdatedatetime)"
                 ." values ('$title', '$text', CURDATE(), CURDATE());";
         
         if(!mysql_query($qry, $this->connection)) {
-            return FALSE;
+            return $id_notice;
         }
         
-        return TRUE;
+        $id_notice = mysql_insert_id($this->connection);
+        
+        return $id_notice;
     }
     
     function getAllNotices() {

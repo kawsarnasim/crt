@@ -111,7 +111,3 @@
 </div>
 
 <!-- End of Left Sidebar -->
-
-<!-- Start of Main Content Area -->
-
-<div id="main_content" align="center">

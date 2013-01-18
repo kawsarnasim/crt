@@ -31,7 +31,7 @@ class NoticeInfo {
     }
     
     public function getText() {
-        return $this->notice_title;
+        return $this->notice_text;
     }
     
     public function setText($text) {
