@@ -4,9 +4,6 @@
 
 <div id="main_content" align="center">
     
-    <p>Values</p>
-
-
     <div class="topic">
         <div class="topic_head">
             Values

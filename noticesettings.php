@@ -3,18 +3,21 @@ require_once("properties.php");
 require_once("./include/util/notice.php");
 
 include 'header2.php';
+?>
+
+<?php
 if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin as admin
     $notice = new Notice();
     $notice->InitDB( $dbhost, $dbusername, $dbpwd, $dbname);
     $allNotices = $notice->getAllNotices();
 ?>
-
 <div id="main_content2" align="center">
-
+    <script type="text/javascript" src="js/ajaxupload.3.5.js" ></script>
+    <link rel="stylesheet" type="text/css" href="./css/ajaxfileupload.css" />
     <style>
-        input { display:block; }
+        input, textarea { display:block; }
         label { display:block; text-align: left; }
-        input.text { margin-bottom:12px; width:95%; padding: .4em; }
+        input.text, textarea.text { margin-bottom:12px; width:95%; padding: .4em; }
         fieldset { padding:0; border:0; margin-top:25px; }
         h1 { font-size: 1.2em; margin: .6em 0; }
         .ui-dialog .ui-state-error { padding: .3em; }
@@ -23,11 +26,15 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
     </style>
 
     <script>
+        function removeTableRow(trId){
+            $('#tr' + trId).remove();
+        }
+        
         function getNoticeRowString(id, ttl, txt) {
             var str =
-                '<tr>' +
-                     '<td style="width: 25%;">'+ttl+'</td>' +
-                     '<td>'+txt+'</td>' +
+                '<tr id="tr'+id+'">' +
+                     '<td id="tdtitle'+id+'" style="width: 25%;">'+ttl+'</td>' +
+                     '<td id="tdtext'+id+'">'+txt+'</td>' +
                      '<td style="width: 10px;">' +
                          '<span class="icon ui-icon ui-icon-pencil" title="edit" onclick="editNotice(' + id + ')"></span>' +
                      '</td>' +
@@ -37,12 +44,19 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                  '</tr>';
              return str;
         }
+        
         function deleteNotice(id) {
-            alert('Deleting ' + id);
+            $( "#iddelete" ).val(id);
+            $( "#dialog-confirm-delete" ).dialog( "open" );
         }
 
         function editNotice(id) {
-            alert('Editing ' + id);
+            $( "#idedit" ).val(id);
+            
+            $( "#ntitle" ).val(  $( "#tdtitle"+id ).text() );
+            $( "#ntext" ).val(  $( "#tdtext"+id ).text() );
+            
+            $( "#dialog-add-notice" ).dialog( "open" );
         }
     </script>
 
@@ -63,9 +77,9 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <?php
                 foreach($allNotices as $noticeInfo) {
                 ?>
-                <tr>
-                    <td style="width: 25%;"><?php echo $noticeInfo->getTitle(); ?></td>
-                    <td><?php echo $noticeInfo->getText(); ?></td>
+                <tr id="tr<?php echo $noticeInfo->getId() ?>">
+                    <td id="tdtitle<?php echo $noticeInfo->getId() ?>" style="width: 25%;"><?php echo $noticeInfo->getTitle(); ?></td>
+                    <td id="tdtext<?php echo $noticeInfo->getId() ?>"><?php echo $noticeInfo->getText(); ?></td>
                     <td style="width: 10px;">
                         <span class="icon ui-icon ui-icon-pencil" title="edit" onclick="editNotice('<?php echo $noticeInfo->getId(); ?>')"></span>
                     </td>
@@ -77,12 +91,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
 <!--                <script>
                     document.write( ''+getNoticeRowString(<?php echo $noticeInfo->getId() ?>, <?php echo $noticeInfo->getTitle(); ?>, <?php echo $noticeInfo->getText(); ?>)+'');
                 </script>-->
-<!--                <script>
-                    var nid = <?php echo $noticeInfo->getId() ?>;
-                    var nttl =  '<?php echo $noticeInfo->getTitle(); ?>';
-                    var ntxt =  '<?php echo $noticeInfo->getText(); ?>';
-                    document.write( getNoticeRowString(nid, nttl, ntxt) );
-                </script>-->
+                
                 <?php
                 }
                 ?>
@@ -98,13 +107,25 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
         <p class="validateTips">All form fields are required.</p>
         <form id="frmnoticeinfo">
             <fieldset>
-                <label for="name">Title</label>
-                <input type="text" name="ntitle" id="ntitle" class="text ui-widget-content ui-corner-all" />
-                <label for="email">Text</label>
-                <input type="text" name="ntext" id="ntext" value="" class="text ui-widget-content ui-corner-all" />
+                <label for="ntitle">Title</label>
+                <input type="text" name="ntitle" id="ntitle" class="text ui-widget-content ui-corner-all" /><br/>
+                <label for="ntext">Text</label>
+                <textarea type="text" name="ntext" id="ntext" class="text ui-widget-content ui-corner-all" ></textarea><br/>
+<!--                <label for="file">Filename:</label>
+                <input type="file" name="file[]" id="file" multiple>-->
+
+                <div id="upload" ><span>Upload File</span></div><span id="status" ></span>		
+		<ul id="files" ></ul>
             </fieldset>
         </form>
     </div>
+    
+    <input type="hidden" id="iddelete" name="iddelete" value="0" />
+    <div id="dialog-confirm-delete" title="Delete this notice?">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The notice will be permanently deleted and cannot be recovered. Are you sure?</p>
+    </div>
+    
+    <input type="hidden" id="idedit" name="idedit" value="0" />
 
 
     <script>
@@ -124,18 +145,19 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             
             $( "#dialog-add-notice" ).dialog({
                 autoOpen: false,
-                height: 250,
+                height: 350,
                 width: 350,
                 modal: true,
                 buttons: {
-                    "Add a notice": function() {
+                    "Save notice": function() {
+                        var edit_notice_id = $("#idedit").val();
                         allFields.removeClass( "ui-state-error" );
                         if(notice_title.val().length==0) {
                             updateTips("Title should not be empty");
                         } else if(notice_txt.val().length==0) {
                             updateTips("Description should not be empty");
                         } else {
-                            var dataString = "notice_title=" + notice_title.val() + "&notice_text="+notice_txt.val();
+                            var dataString = "notice_title=" + notice_title.val() + "&notice_text="+notice_txt.val()+"&delete_notice_id=0"+"&edit_notice_id="+edit_notice_id;
                             var thisdialog = this;
                             $.ajax({  
                                 type: "POST",  
@@ -145,8 +167,12 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                                     if(response > 0) {
                                         $( "#notices tbody" ).append( getNoticeRowString(response, notice_title.val(), notice_txt.val() ) );
                                         $( thisdialog ).dialog( "close" );
+                                    } else if(response=="success"){
+                                        $( "#tdtitle"+edit_notice_id ).text( notice_title.val() );
+                                        $( "#tdtext"+edit_notice_id ).text( notice_txt.val() );
+                                        $( thisdialog ).dialog( "close" );
                                     } else {
-                                        updateTips("Database error, could not create notice.");
+                                        updateTips("Database error, could not save notice.");
                                     }
                                 }  
                             });
@@ -163,26 +189,81 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             });
 
             $( "#add-notice" ).button().click(function() {
+                $("#idedit").val(0)
                 $( "#dialog-add-notice" ).dialog( "open" );
             });
-                        
+            
+            $( "#dialog-confirm-delete" ).dialog({
+                autoOpen: false,
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Delete notice": function() {
+                        var deleteid = $("#iddelete").val();
+                        var dataString = "notice_title=" + "&notice_text="+"&delete_notice_id=" + deleteid + "&edit_notice_id=0";
+                        var thisdialog = this;
+                        $.ajax({  
+                            type: "POST",  
+                            url: "savenotice.php",  
+                            data: dataString,
+                            success: function(response){  
+                                if(response == "success") {
+                                    removeTableRow( deleteid );
+                                } else {
+                                    alert("Database error, could not delete notice.");
+                                }
+                                $( thisdialog ).dialog( "close" );
+                            }  
+                        });
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+            
+            var btnUpload=$('#upload');
+            var status=$('#status');
+            new AjaxUpload(btnUpload, {
+                action: 'upload-file.php',
+                name: 'uploadfile',
+                onSubmit: function(file, ext){
+                    if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+                        // extension is not allowed 
+                        status.text('Only JPG, PNG or GIF files are allowed');
+                        return false;
+                    }
+                    status.text('Uploading...');
+                },
+                onComplete: function(file, response){
+                    //On completion clear the status
+                    status.text('');
+                    //Add uploaded file to list
+                    if(response==="success"){
+                        $('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');
+                    } else{
+                        $('<li></li>').appendTo('#files').text(file).addClass('error');
+                    }
+                }
+            });
+                                    
         });
     </script>
 
 
-    <?php
-    } else {
-        ?>
-
-        <div class="topic">
-            <div class="topic_head">
-                You are not supposed to view this page.
-            </div>
-        </div>
-
-        <?php
-    }
-       
-    
+<?php
 include 'footer2.php';
+} else {
+?>
+<div id="main_content" align="center">
+    <div class="topic">
+        <div class="topic_head">
+            Please log in as administrator to view the content of this page.
+        </div>
+    </div>
+
+<?php
+include 'footer.php';
+}
 ?>

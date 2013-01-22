@@ -6,8 +6,6 @@ $usertype = 3;
 if ($fgmembersite->CheckLogin()) {
     $usertype = $fgmembersite->UserType();
     $loggedin = TRUE;
-} else {
-    $usertype = 3;
 }
 ?>
 

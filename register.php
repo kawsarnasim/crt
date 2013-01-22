@@ -94,8 +94,7 @@ if (!$loggedin) {
     Form Code End (see html-form-guide.com for more info.)
     -->
     <?php
-} else
-if ($loggedin) {
+} else {
     echo "<br/><p>login stat:  loggedin </p>";
     $fgmembersite->RedirectToURL("index.php");
 }

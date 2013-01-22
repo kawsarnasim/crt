@@ -1,3 +1,10 @@
+<?php
+    require_once("properties.php");
+    require_once("./include/util/notice.php");
+    $notice = new Notice();
+    $notice->InitDB( $dbhost, $dbusername, $dbpwd, $dbname);
+    $allNotices = $notice->getAllNotices();
+?>
     </div>    
         <div id="right_sidebar">
             <div id="publication">
@@ -20,15 +27,15 @@
                             Notices
                         </th>
                     </tr>
+                    <?php
+                    foreach($allNotices as $noticeInfo) {
+                    ?>
                     <tr>
-                        <td>Notice 1</td>
+                        <td><?php echo $noticeInfo->getTitle(); ?></td>
                     </tr>
-                    <tr>
-                        <td>Notice 2</td>
-                    </tr>
-                    <tr>
-                        <td>Notice 3</td>
-                    </tr>
+                    <?php
+                    }
+                    ?>
                 </table>                
             </div>
         </div>

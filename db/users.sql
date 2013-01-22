@@ -25,6 +25,7 @@ Create Table users (
         ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
+
 #Table Notice:
 CREATE  TABLE notices (
   id_notice BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
@@ -33,4 +34,15 @@ CREATE  TABLE notices (
   creationdatetime DATE NOT NULL,
   lastupdatedatetime DATE NOT NULL,
   PRIMARY KEY (`id_notice`)
+)ENGINE=InnoDB;
+
+#Table Files:
+CREATE  TABLE files (
+  id_file BIGINT NOT NULL ,
+  name VARCHAR(45) NULL ,
+  type TINYTEXT NULL ,
+  size BIGINT NULL ,
+  location VARCHAR(120) NULL ,
+  upload_date_time DATETIME NOT NULL ,
+  PRIMARY KEY (id_file)
 )ENGINE=InnoDB;
