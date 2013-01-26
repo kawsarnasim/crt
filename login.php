@@ -53,6 +53,10 @@ include 'header2.php';
             Uses the excellent form validation script from JavaScript-coder.com-->
 
             <script type='text/javascript'>
+                $(function() {
+                    $("#username").focus();
+                });
+                    
                 // <![CDATA[
 
                 var frmvalidator  = new Validator("login");

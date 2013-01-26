@@ -12,8 +12,6 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
     $allNotices = $notice->getAllNotices();
 ?>
 <div id="main_content2" align="center">
-    <script type="text/javascript" src="js/ajaxupload.3.5.js" ></script>
-    <link rel="stylesheet" type="text/css" href="./css/ajaxfileupload.css" />
     <style>
         input, textarea { display:block; }
         label { display:block; text-align: left; }
@@ -113,9 +111,6 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <textarea type="text" name="ntext" id="ntext" class="text ui-widget-content ui-corner-all" ></textarea><br/>
 <!--                <label for="file">Filename:</label>
                 <input type="file" name="file[]" id="file" multiple>-->
-
-                <div id="upload" ><span>Upload File</span></div><span id="status" ></span>		
-		<ul id="files" ></ul>
             </fieldset>
         </form>
     </div>
@@ -219,31 +214,6 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     },
                     Cancel: function() {
                         $( this ).dialog( "close" );
-                    }
-                }
-            });
-            
-            var btnUpload=$('#upload');
-            var status=$('#status');
-            new AjaxUpload(btnUpload, {
-                action: 'upload-file.php',
-                name: 'uploadfile',
-                onSubmit: function(file, ext){
-                    if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
-                        // extension is not allowed 
-                        status.text('Only JPG, PNG or GIF files are allowed');
-                        return false;
-                    }
-                    status.text('Uploading...');
-                },
-                onComplete: function(file, response){
-                    //On completion clear the status
-                    status.text('');
-                    //Add uploaded file to list
-                    if(response==="success"){
-                        $('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');
-                    } else{
-                        $('<li></li>').appendTo('#files').text(file).addClass('error');
                     }
                 }
             });
