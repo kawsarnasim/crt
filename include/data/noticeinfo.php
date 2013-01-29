@@ -37,7 +37,8 @@ class NoticeInfo {
     public function setText($text) {
         $this->notice_text=$text;
     }
-    
+
+
     public function getCreationDateTime() {
         return $this->creationDateTime;
     }

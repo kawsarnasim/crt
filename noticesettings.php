@@ -23,6 +23,8 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
         span.ui-icon { cursor: pointer;}
     </style>
 
+    <script src="js/jquery.form.js"></script>
+    
     <script>
         function removeTableRow(trId){
             $('#tr' + trId).remove();
@@ -55,6 +57,14 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             $( "#ntext" ).val(  $( "#tdtext"+id ).text() );
             
             $( "#dialog-add-notice" ).dialog( "open" );
+        }
+        
+        function afterSuccess() {
+                alert('files uploaded');
+        }
+
+        function submitfile() {
+                $('#file').click();
         }
     </script>
 
@@ -103,7 +113,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
 
     <div id="dialog-add-notice" title="Add new notice">
         <p class="validateTips">All form fields are required.</p>
-        <form id="frmnoticeinfo">
+        <form id="frmnoticeinfo" action="upload_multi_file.php" enctype="multipart/form-data" method="post">
             <fieldset>
                 <label for="ntitle">Title</label>
                 <input type="text" name="ntitle" id="ntitle" class="text ui-widget-content ui-corner-all" /><br/>
@@ -111,7 +121,15 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <textarea type="text" name="ntext" id="ntext" class="text ui-widget-content ui-corner-all" ></textarea><br/>
 <!--                <label for="file">Filename:</label>
                 <input type="file" name="file[]" id="file" multiple>-->
+                <div id="myFiles"></div>
             </fieldset>
+        </form>
+        <form id="fileform" action="upload_multi_file.php" enctype="multipart/form-data" method="post">
+            <label for="file">Filename:</label>
+            <span id="upload">
+                <input type="file" name="file[]" id="file" multiple style="visibility:hidden;position:absolute;top:0;left:0"/>
+                <input type="button" id="btnsubmit" name="btnsubmit" value="Upload" />
+            </span>
         </form>
     </div>
     
@@ -185,7 +203,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
 
             $( "#add-notice" ).button().click(function() {
                 $("#idedit").val(0)
-                $( "#dialog-add-notice" ).dialog( "open" );
+                $("#dialog-add-notice" ).dialog( "open" );
             });
             
             $( "#dialog-confirm-delete" ).dialog({
@@ -217,6 +235,24 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     }
                 }
             });
+            
+            // --------------------------------------
+            // + File upload:
+            $("#btnsubmit").click(function () {
+                    submitfile();
+            });
+
+            $('input[type=file]').change(function(e){
+                //var formData = new FormData($("#fileform")[0]);
+                //var formData = $('#fileform').formSerialize();
+
+                $('#fileform').ajaxSubmit({
+                        target: '#myFiles',
+                        success:  afterSuccess //call function after success
+                });
+            });
+            // - File upload
+            // --------------------------------------
                                     
         });
     </script>
