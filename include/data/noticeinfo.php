@@ -7,6 +7,7 @@ class NoticeInfo {
     private $id_notice;
     private $notice_title;
     private $notice_text;
+    private $fileIDs;
     private $creationDateTime;
     private $updateDateTime;
     
@@ -38,6 +39,25 @@ class NoticeInfo {
         $this->notice_text=$text;
     }
 
+    /**
+     * Get a comma seperated string of file ids
+     * @return type 
+     */
+    public function getFileIDs() {
+        return $this->fileIDs;
+    }
+    
+    /**
+     * Creates a comma seperated string of fileids
+     * @param type $fileId 
+     */
+    public function addFile($fileId) {
+        if( strcmp($this->fileIDs)==0 ) {
+            $this->fileIDs=$fileId;
+        } else {
+            $this->fileIDs .= ",$fileId";
+        }
+    }
 
     public function getCreationDateTime() {
         return $this->creationDateTime;

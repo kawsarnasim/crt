@@ -1,8 +1,9 @@
 <?php
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'/data/fileinfo.php'); 
+//require_once("../data/fileinfo.php");
 
-require_once("./include/data/fileinfo.php");
-
-include "dbconnect.php";
+require_once("dbconnect.php");
 
 class FileManager extends DBConnect {
 
@@ -31,7 +32,7 @@ class FileManager extends DBConnect {
             } catch (Exception $exc) {
                 
             }
-            return $fileInfoArray;
+            return $fileInfo;
         }
 
         $row = mysql_fetch_array($result);
@@ -52,8 +53,17 @@ class FileManager extends DBConnect {
         return $fileInfo;
     }
 
-    function getAllFiles() {
+    /**
+     * Returns the files with the provided file IDs
+     * @param type $fileIdArray array of file IDs
+     * @return array 
+     */
+    function getAllFiles($fileIdArray) {
         $fileInfoArray = array();
+        
+        if( count($fileIdArray) == 0 ) {
+            return $fileInfoArray;
+        }
         $this->connection = $this->ConnectDB();
         if ($this->connection == NULL) {
             try {
@@ -63,7 +73,17 @@ class FileManager extends DBConnect {
             }
             return $fileInfoArray;
         }
-        $qry = "SELECT * FROM files";
+        $fileIdStr = "";
+        if(count($fileIdArray)>0) {
+            $i = 0;
+            for($i = 0; $i < count($fileIdArray)-1 ; $i++) {
+                $fileIdStr .= $fileIdArray[$i].", ";
+            }
+            $fileIdStr .= $fileIdArray[$i];
+        }
+        
+        $qry = "SELECT * FROM files WHERE id_file in ($fileIdStr)";
+        
         $result = mysql_query($qry, $this->connection);
 
         if (!$result || mysql_num_rows($result) <= 0) {
@@ -95,13 +115,46 @@ class FileManager extends DBConnect {
 
         return $fileInfoArray;
     }
+    
+    function getLocation($fileid) {
+        $location = "";
+        $this->connection = $this->ConnectDB();
+        if ($this->connection == NULL) {
+            try {
+                $this->CloseConnectionDB();
+            } catch (Exception $exc) {
+                
+            }
+            return $location;
+        }
+        $qry = "SELECT location FROM files where id_file=$fileid";
+        $result = mysql_query($qry, $this->connection);
 
-// End of getAllNotices() method
+        if (!$result || mysql_num_rows($result) <= 0) {
+            try {
+                $this->CloseConnectionDB();
+            } catch (Exception $exc) {
+                
+            }
+            return $location;
+        }
+
+        $row = mysql_fetch_array($result);
+        $location = $row['location'];
+
+        try {
+            $this->CloseConnectionDB();
+        } catch (Exception $exc) {
+            
+        }
+
+        return $location;
+    }
 
     /**
      * Create a new File in the Database.
      */
-    function createFile($name, $type, $size, $location, $upload_date_time) {
+    function saveFile($name, $type, $size, $location) {
         $id_file = 0;
         $this->connection = $this->ConnectDB();
 
@@ -150,7 +203,7 @@ class FileManager extends DBConnect {
             } catch (Exception $exc) {
                 
             }
-            return "fail";
+            return FALSE;
         }
 
         $qry = "DELETE FROM files WHERE id_file=$id_file";
@@ -161,7 +214,7 @@ class FileManager extends DBConnect {
             } catch (Exception $exc) {
                 
             }
-            return "fail";
+            return FALSE;
         }
 
         try {
@@ -170,7 +223,7 @@ class FileManager extends DBConnect {
             
         }
 
-        return "success";
+        return TRUE;
     }
 
     /**

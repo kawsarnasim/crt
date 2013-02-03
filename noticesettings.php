@@ -1,6 +1,7 @@
 <?php
 require_once("properties.php");
 require_once("./include/util/notice.php");
+require_once("./include/util/filemanager.php");
 
 include 'header2.php';
 ?>
@@ -26,6 +27,15 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
     <script src="js/jquery.form.js"></script>
     
     <script>
+        // collected from: http://blog.stevenlevithan.com/archives/faster-trim-javascript
+        function trim12 (str) {
+            var	str = str.replace(/^\s\s*/, ''),
+                    ws = /\s/,
+                    i = str.length;
+            while (ws.test(str.charAt(--i)));
+            return str.slice(0, i + 1);
+        }
+
         function removeTableRow(trId){
             $('#tr' + trId).remove();
         }
@@ -60,7 +70,29 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
         }
         
         function afterSuccess() {
-                alert('files uploaded');
+            var fileStr = trim12($("#newfiles").text());
+            if(fileStr.charAt(fileStr.length-1)== ',') {
+                fileStr = fileStr.substr(0, fileStr.length-1);
+            }
+            var fileArray = fileStr.split(',');
+            var i ;
+            for(i = 0; i < fileArray.length; i++) {
+                var fileValues = fileArray[i].split('|');
+                var fileId = fileValues[0];
+                var fileName = fileValues[1];
+                var fileSize = fileValues[3];
+                var fileLocation = fileValues[4];
+                addFileToDialog(fileName, fileSize, fileLocation);
+            }
+        }
+        
+        function addFileToDialog(fname, fsize, flocation) {
+            var rowStr= "<tr>";
+            rowStr +=   "   <td><a href=\""+flocation+"\" >"+fname+"</a></td>";
+            rowStr +=   "   <td>"+Math.floor( (fsize/1024) * 100) / 100+" KB</td>";
+            rowStr +=   "</tr>";
+            
+            $("#myFiles tbody").append(rowStr);
         }
 
         function submitfile() {
@@ -78,7 +110,10 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <thead>
                 <tr>
                     <th style="width: 25%;">Title</th>
-                    <th colspan="3">Text</th>
+                    <th>Text</th>
+                    <th>Attachments</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,6 +123,22 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <tr id="tr<?php echo $noticeInfo->getId() ?>">
                     <td id="tdtitle<?php echo $noticeInfo->getId() ?>" style="width: 25%;"><?php echo $noticeInfo->getTitle(); ?></td>
                     <td id="tdtext<?php echo $noticeInfo->getId() ?>"><?php echo $noticeInfo->getText(); ?></td>
+                    <td>
+                        <input type="hidden" id="attachedfiles<?php echo $noticeInfo->getId() ?>" value="<?php echo $noticeInfo->getFileIDs(); ?>"></input>
+                        <?php
+                        $fileManager = new FileManager();
+                        $fileManager->InitDB($dbhost, $dbusername, $dbpwd, $dbname);
+                        $allFiles = $fileManager->getAllFiles($noticeInfo->getFileIDs());
+                        for($fi = 0; $fi < count($allFiles) ; $fi++) {
+                            if($fi != 0) {
+                                echo ", ";
+                            }
+                            ?>
+                            <a href="<?php echo $allFiles[$fi]->getLocation(); ?>"><?php echo $allFiles[$fi]->getName(); ?></a>
+                            <?php
+                        }
+                        ?>
+                    </td>
                     <td style="width: 10px;">
                         <span class="icon ui-icon ui-icon-pencil" title="edit" onclick="editNotice('<?php echo $noticeInfo->getId(); ?>')"></span>
                     </td>
@@ -121,10 +172,15 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 <textarea type="text" name="ntext" id="ntext" class="text ui-widget-content ui-corner-all" ></textarea><br/>
 <!--                <label for="file">Filename:</label>
                 <input type="file" name="file[]" id="file" multiple>-->
-                <div id="myFiles"></div>
+                <div id="newfiles" style="display:none;"/></div>
+                <table id="myFiles">
+                    <thead></thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </fieldset>
         </form>
-        <form id="fileform" action="upload_multi_file.php" enctype="multipart/form-data" method="post">
+        <form id="fileform" action="service/upload_multi_file.php" enctype="multipart/form-data" method="post">
             <label for="file">Filename:</label>
             <span id="upload">
                 <input type="file" name="file[]" id="file" multiple style="visibility:hidden;position:absolute;top:0;left:0"/>
@@ -174,7 +230,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                             var thisdialog = this;
                             $.ajax({  
                                 type: "POST",  
-                                url: "savenotice.php",  
+                                url: "service/savenotice.php",  
                                 data: dataString,
                                 success: function(response){  
                                     if(response > 0) {
@@ -218,7 +274,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                         var thisdialog = this;
                         $.ajax({  
                             type: "POST",  
-                            url: "savenotice.php",  
+                            url: "service/savenotice.php",  
                             data: dataString,
                             success: function(response){  
                                 if(response == "success") {
@@ -247,7 +303,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 //var formData = $('#fileform').formSerialize();
 
                 $('#fileform').ajaxSubmit({
-                        target: '#myFiles',
+                        target: '#newfiles',
                         success:  afterSuccess //call function after success
                 });
             });

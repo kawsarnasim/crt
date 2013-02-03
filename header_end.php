@@ -7,7 +7,7 @@
 
         <form>
             <div>
-                <input type="text" />
+                <input type="text" class="searchtext" />
                 <input type="button" value="Submit" class="button" onclick="search()"/>
                 <?php
                 if (!$loggedin) {

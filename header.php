@@ -15,7 +15,7 @@ include 'header_start.php';
 ?>
 
 <div id="news_flash">
-    News Flash
+    <marquee>Ongoing Research: Efficiency of Boro Rice Farming Households in Selected Area of Bangladesh.</marquee>
 </div>
 
 
