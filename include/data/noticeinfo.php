@@ -52,7 +52,7 @@ class NoticeInfo {
      * @param type $fileId 
      */
     public function addFile($fileId) {
-        if( strcmp($this->fileIDs)==0 ) {
+        if( strcmp($this->fileIDs, "")==0 ) {
             $this->fileIDs=$fileId;
         } else {
             $this->fileIDs .= ",$fileId";

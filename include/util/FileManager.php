@@ -58,12 +58,8 @@ class FileManager extends DBConnect {
      * @param type $fileIdArray array of file IDs
      * @return array 
      */
-    function getAllFiles($fileIdArray) {
+    function getAllFiles($fileIdStr) {
         $fileInfoArray = array();
-        
-        if( count($fileIdArray) == 0 ) {
-            return $fileInfoArray;
-        }
         $this->connection = $this->ConnectDB();
         if ($this->connection == NULL) {
             try {
@@ -73,13 +69,13 @@ class FileManager extends DBConnect {
             }
             return $fileInfoArray;
         }
-        $fileIdStr = "";
-        if(count($fileIdArray)>0) {
-            $i = 0;
-            for($i = 0; $i < count($fileIdArray)-1 ; $i++) {
-                $fileIdStr .= $fileIdArray[$i].", ";
-            }
-            $fileIdStr .= $fileIdArray[$i];
+        $fileIdStr = trim($fileIdStr);
+        if(strlen($fileIdStr) > 0 && $fileIdStr[strlen($fileIdStr)-1] == ',') {
+           $fileIdStr = substr( $fileIdStr , 0, strlen($fileIdStr)-1);
+        } 
+        
+        if(strcmp($fileIdStr,"") == 0) {
+            return $fileInfoArray;
         }
         
         $qry = "SELECT * FROM files WHERE id_file in ($fileIdStr)";
@@ -102,9 +98,9 @@ class FileManager extends DBConnect {
             $fileInfo->setType($row['type']);
             $fileInfo->setSize($row['size']);
             $fileInfo->setLocation($row['location']);
-            $fileInfo->setUploadDateTime($row['update_date_time']);
+            $fileInfo->setUploadDateTime($row['upload_date_time']);
 
-            $fileInfoArray[] = $noticeInfo;
+            $fileInfoArray[] = $fileInfo;
         }
 
         try {
@@ -207,6 +203,59 @@ class FileManager extends DBConnect {
         }
 
         $qry = "DELETE FROM files WHERE id_file=$id_file";
+
+        if (!mysql_query($qry, $this->connection)) {
+            try {
+                $this->CloseConnectionDB();
+            } catch (Exception $exc) {
+                
+            }
+            return FALSE;
+        }
+
+        try {
+            $this->CloseConnectionDB();
+        } catch (Exception $exc) {
+            
+        }
+        
+        return TRUE;
+    }
+    
+    function deleteFileFromFileSystem($fileId) {
+        $location = $this->getLocation($fileid);
+        if(strcmp($location, "")==0) {
+            return FALSE;
+        }
+        
+        $st = split("/", $location);
+        $locationOnDisk = "uploads/".$st[count($st)-1];
+        if(!unlink($locationOnDisk)) { // delete from file system only after successful deletion from database
+            return FALSE;
+        }
+        
+        return TRUE;
+    }
+    
+    /**
+     * Delete a group of files from database with the fIDs provided
+     * @param type $fileIds string of comma seperated file ids
+     * @return type 
+     */
+    function deleteFiles($fileIds) {
+
+        $this->connection = $this->ConnectDB();
+
+        if ($this->connection == NULL) {
+            try {
+                $this->CloseConnectionDB();
+            } catch (Exception $exc) {
+                
+            }
+            return FALSE;
+        }
+
+        $qry = "DELETE FROM files WHERE id_file in ($fileIds)";
 
         if (!mysql_query($qry, $this->connection)) {
             try {

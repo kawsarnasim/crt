@@ -35,18 +35,27 @@ if ($loggedin && $usertype==1) { // This page can accessed only if logged in as 
         $neditid = $_POST['edit_notice_id'];
     else
         $neditid = 0;
+    
+    if(isset ($_POST['attached_files']))
+        $attached_file_ids = $_POST['attached_files'];
+    else
+        $attached_file_ids = "";
 
     if($ndeleteid > 0)
     {
-        echo $notice->deleteNotice($ndeleteid);
+        $res = $notice->deleteNotice($ndeleteid);
+        echo $res;
     }
     else if($neditid > 0)
     {
-        echo $notice->updateNotice($neditid, $ntitle, $ntext);
+        echo $notice->updateNotice($neditid, $ntitle, $ntext, $attached_file_ids);
     }
     else if( strcmp($ntitle, "") != 0 && strcmp($ntext, "") != 0)
     {
-        echo $notice->createNotice($ntitle, $ntext);
+        if(strcmp($attached_file_ids,"")==0)
+            echo $notice->createNotice($ntitle, $ntext, "");
+        else
+            echo $notice->createNotice($ntitle, $ntext, $attached_file_ids);
     }
 
 } else {

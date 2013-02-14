@@ -7,7 +7,6 @@ class FileInfo {
     private $type;
     private $size;
     private $location;
-    private $fileids;
     private $upload_date_time;
 
     function FileInfo() {
@@ -37,23 +36,23 @@ class FileInfo {
     public function setSize($size) {
         $this->size = $size;
     }
+    
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
 
     public function getLocation() {
-        return $this->size;
+        return $this->location;
     }
 
     public function setLocation($location) {
         $this->location = $location;
     }
     
-    public function addFiles($fileIds) {
-        $this->fileids[] = $fileIds;
-    }
-    
-    public function getFiles() {
-        return $this->fileids;
-    }
-
     public function getUploadDateTime() {
         return $this->upload_date_time;
     }
