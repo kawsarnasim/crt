@@ -44,32 +44,37 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             var str =  '';
             var attachedFiles = '';
             var linkrows =  '';
+            
             var fileStr = trim12($("#newfiles").text());
             if(fileStr.charAt(fileStr.length-1)== ',') {
                 fileStr = fileStr.substr(0, fileStr.length-1);
             }
-            var fileArray = fileStr.split(',');
-            var i ;
-            for(i = 0; i < fileArray.length; i++) {
-                var fileValues = fileArray[i].split('|');
-                var fileId = fileValues[0];
-                var fileName = fileValues[1];
-                var fileType = fileValues[2];
-                var fileSize = fileValues[3];
-                var fileLocation = fileValues[4];
-                if(i != 0) {
-                    attachedFiles += ',';
+            if(fileStr != "") {
+                var fileArray = fileStr.split(',');
+                var i ;
+            
+                for(i = 0; i < fileArray.length; i++) {
+                    var fileValues = fileArray[i].split('|');
+                    var fileId = fileValues[0];
+                    var fileName = fileValues[1];
+                    var fileType = fileValues[2];
+                    var fileSize = fileValues[3];
+                    var fileLocation = fileValues[4];
+                    if(i != 0) {
+                        attachedFiles += ',';
+                    }
+                        attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
+
+                    linkrows += '<tr><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
                 }
-                    attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
-                
-                linkrows += '<tr><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
             }
+            
             str += 
                 '<table id="noticefiles'+noticeId+'">'+
                 '   <thead></thead>' +
                 '   <tbody>' +
                     linkrows +
-                '   </tbody>'
+                '   </tbody>' +
                 '</table>' +
                 '<input type="hidden" id="attachedfiles'+noticeId+'" value="'+attachedFiles+'"></input>';
             
@@ -110,15 +115,17 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             if(attachedFileStr.charAt(attachedFileStr.length-1)== ',') {
                 attachedFileStr = attachedFileStr.substr(0, attachedFileStr.length-1);
             }
-            var fileArray = attachedFileStr.split(',');
-            var i ;
-            for(i = 0; i < fileArray.length; i++) {
-                var fileValues = fileArray[i].split('|');
-                var fileId = fileValues[0];
-                var fileName = fileValues[1];
-                var fileSize = fileValues[3];
-                var fileLocation = fileValues[4];
-                addFileToDialog( fileId, fileName, fileSize, fileLocation );
+            if(attachedFileStr !=  '') {
+                var fileArray = attachedFileStr.split(',');
+                var i ;
+                for(i = 0; i < fileArray.length; i++) {
+                    var fileValues = fileArray[i].split('|');
+                    var fileId = fileValues[0];
+                    var fileName = fileValues[1];
+                    var fileSize = fileValues[3];
+                    var fileLocation = fileValues[4];
+                    addFileToDialog( fileId, fileName, fileSize, fileLocation );
+                }
             }
             
             $( "#dialog-add-notice" ).dialog( "open" );
@@ -126,32 +133,83 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
         
         function addNewFilesToNoticeAttachmentCell(noticeId) {
             var attachedFiles = $( "#attachedfiles"+noticeId ).val();
+            if(attachedFiles ==  undefined) {
+                attachedFiles = '';
+            }
             var fileStr = trim12($("#newfiles").text());
             var linkrows = '';
             if(fileStr.charAt(fileStr.length-1)== ',') {
                 fileStr = fileStr.substr(0, fileStr.length-1);
             }
-            var fileArray = fileStr.split(',');
-            var i ;
-            for(i = 0; i < fileArray.length; i++) {
-                var fileValues = fileArray[i].split('|');
-                var fileId = fileValues[0];
-                var fileName = fileValues[1];
-                var fileType = fileValues[2];
-                var fileSize = fileValues[3];
-                var fileLocation = fileValues[4];
-                
-                if(attachedFiles != '') {
-                    attachedFiles += ',';
-                }                
-                attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
-                
-                linkrows += '<tr><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
+            if(fileStr !=  '') {
+                var fileArray = fileStr.split(',');
+                var i ;
+                for(i = 0; i < fileArray.length; i++) {
+                    var fileValues = fileArray[i].split('|');
+                    var fileId = fileValues[0];
+                    var fileName = fileValues[1];
+                    var fileType = fileValues[2];
+                    var fileSize = fileValues[3];
+                    var fileLocation = fileValues[4];
+
+                    if(attachedFiles != '') {
+                        attachedFiles += ',';
+                    }
+                    attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
+
+                    linkrows += '<tr id="noticefile'+fileId+'"><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
+                }
             }
             
             $( "#attachedfiles"+noticeId ).val(attachedFiles);
             $( "#noticefiles"+noticeId+" tbody" ).append(linkrows);
         }
+        
+        function deleteFileFromNoticeAttachmentCell(noticeId) {
+            var deletedFileIDArray = deletedDialogFiles.split(',');
+            
+            var attachedFiles = $( "#attachedfiles"+noticeId ).val();
+            if(attachedFiles ==  undefined) {
+                attachedFiles = '';
+            }
+            var fileStr = trim12(attachedFiles);
+            attachedFiles = '';
+            if(fileStr.charAt(fileStr.length-1)== ',') {
+                fileStr = fileStr.substr(0, fileStr.length-1);
+            }
+            if(fileStr !=  '') {
+                var fileArray = fileStr.split(',');
+                var i ;
+                for(i = 0; i < fileArray.length; i++) {
+                    var fileValues = fileArray[i].split('|');
+                    var fileId = fileValues[0];
+                    var fileName = fileValues[1];
+                    var fileType = fileValues[2];
+                    var fileSize = fileValues[3];
+                    var fileLocation = fileValues[4];
+                    
+                    var j;
+                    var foundInDeletedFiles=0;
+                    for(j= 0 ; j < deletedFileIDArray.length ; j++) {
+                        if(fileId==deletedFileIDArray[j]) {
+                            foundInDeletedFiles = 1;
+                        }
+                    }
+            
+                    if(foundInDeletedFiles == 0) {
+                        if(attachedFiles != '') {
+                            attachedFiles += ',';
+                        }
+                        attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
+                    } else {
+                        $('#noticefile' + fileId).remove();
+                    }
+                }
+            }
+            
+            $( "#attachedfiles"+noticeId ).val(attachedFiles);
+        }
+        
         
         /** + File Upload **/
         
@@ -198,20 +256,22 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
             if(fileStr.charAt(fileStr.length-1)== ',') {
                 fileStr = fileStr.substr(0, fileStr.length-1);
             }
-            var fileArray = fileStr.split(',');
-            var i ;
-            for(i = 0; i < fileArray.length; i++) {
-                var fileValues = fileArray[i].split('|');
-                var fileId = fileValues[0];
-                var fileName = fileValues[1];
-                var fileType = fileValues[2];
-                var fileSize = fileValues[3];
-                var fileLocation = fileValues[4];
-                if(fileId!=fid) {
-                    newFileStr += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation +  ',';
+            if(fileStr !=  '') {
+                var fileArray = fileStr.split(',');
+                var i ;
+                for(i = 0; i < fileArray.length; i++) {
+                    var fileValues = fileArray[i].split('|');
+                    var fileId = fileValues[0];
+                    var fileName = fileValues[1];
+                    var fileType = fileValues[2];
+                    var fileSize = fileValues[3];
+                    var fileLocation = fileValues[4];
+                    if(fileId!=fid) {
+                        newFileStr += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation +  ',';
+                    }
                 }
+                $("#newfiles").text(newFileStr);
             }
-            $("#newfiles").text(newFileStr);
         }
         
         function deleteUnwantedFilesFromDialog() {
@@ -309,7 +369,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                                 $attachedFileStr .= ",";
                             }
                             ?>
-                            <tr><td><a href="<?php echo $allFiles[$fi]->getLocation(); ?>"><?php echo $allFiles[$fi]->getName(); ?></a></td></tr>
+                                <tr id="noticefile<?php echo $allFiles[$fi]->getId() ?>"><td><a href="<?php echo $allFiles[$fi]->getLocation(); ?>"><?php echo $allFiles[$fi]->getName(); ?></a></td></tr>
                             <?php
                             $attachedFileStr .= $allFiles[$fi]->getId()."|".$allFiles[$fi]->getName()."|".$allFiles[$fi]->getType()."|".$allFiles[$fi]->getSize()."|".$allFiles[$fi]->getLocation();
                         }
@@ -324,12 +384,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     <td style="width: 10px;">
                         <span class="icon ui-icon ui-icon-trash" title="delete" onclick="deleteNotice('<?php echo $noticeInfo->getId(); ?>')"></span>
                     </td>
-                </tr>
-                
-<!--                <script>
-                    document.write( ''+getNoticeRowString(<?php echo $noticeInfo->getId() ?>, <?php echo $noticeInfo->getTitle(); ?>, <?php echo $noticeInfo->getText(); ?>)+'');
-                </script>-->
-                
+                </tr>                
                 <?php
                 }
                 ?>
@@ -398,6 +453,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 notice_txt.val('');
                 deleted_files.val('');
                 new_files.val('');
+                //$("#myFiles").find("tr").remove();
             }
             
             $( "#dialog-add-notice" ).dialog({
@@ -412,6 +468,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                         var alreadyAttachedFileStr = "";
                         var alreadyAttachedFiles = "";
                         if(edit_notice_id > 0) {
+                            deleteFileFromNoticeAttachmentCell(edit_notice_id);
                             alreadyAttachedFileStr = $( "#attachedfiles"+edit_notice_id ).val();
                         }
                         if(alreadyAttachedFileStr.charAt(alreadyAttachedFileStr.length-1)== ',') {

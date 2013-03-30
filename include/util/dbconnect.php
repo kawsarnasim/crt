@@ -5,6 +5,7 @@ class DBConnect {
     private $username;
     private $pwd;
     private $database;
+    private $db_host;
     private $tablename;
     private $connection;
 
@@ -31,6 +32,22 @@ class DBConnect {
         }
         
         return $this->connection;
+    }
+    
+    function getDBHost() {
+        return $this->db_host;
+    }
+    
+    function getDBUserName() {
+        return $this->username;
+    }
+    
+    function getDBPassword() {
+        return $this->pwd;
+    }
+    
+    function getDBName() {
+        return $this->database;
     }
     
     function CloseConnectionDB() {

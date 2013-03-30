@@ -222,13 +222,14 @@ class FileManager extends DBConnect {
         return TRUE;
     }
     
-    function deleteFileFromFileSystem($fileId) {
+    function deleteFileFromFileSystem($fileid) {
         $location = $this->getLocation($fileid);
         if(strcmp($location, "")==0) {
             return FALSE;
         }
         
-        $st = split("/", $location);
+        //$st = split("/", $location);
+        $st = preg_split("/[\/]/", $location);
         $locationOnDisk = "uploads/".$st[count($st)-1];
         if(!unlink($locationOnDisk)) { // delete from file system only after successful deletion from database
             return FALSE;

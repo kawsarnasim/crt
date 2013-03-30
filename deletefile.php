@@ -23,7 +23,7 @@ if(isset ($_POST['fileid']) ) {
     if(strcmp($location,"") == 0) {
         $success_msg = "file not found";
     } else {
-        $st = split("/", $location);
+        $st = preg_split("/[\/]/", $location);
         $locationOnDisk = "uploads/".$st[count($st)-1];
         if(!$fileManager->deleteFile($fileid)) {
             $success_msg ="could not delete the file from database";

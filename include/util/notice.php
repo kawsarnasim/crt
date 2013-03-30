@@ -1,7 +1,8 @@
 <?php
 
 require_once(dirname(dirname(__FILE__)).'/data/noticeinfo.php');
-include "dbconnect.php";
+require_once("filemanager.php");
+//include "dbconnect.php";
 
 class Notice extends DBConnect{
 
@@ -159,7 +160,7 @@ class Notice extends DBConnect{
             } catch(Exception $exc) {}
             return "fail";
         }
-        
+                
         $qry =  "DELETE FROM notices WHERE id_notice=$id_notice";
         
         if(!mysql_query($qry, $this->connection)) {
@@ -187,7 +188,18 @@ class Notice extends DBConnect{
         if(strcmp($fileIds, "")==0) {
             return FALSE;
         }
+                
+        $allFileIds = preg_split("/[\s,]+/", $fileIds);
+        $allFileIds = array_unique($allFileIds);
+        $fileManager = new FileManager();
+        $fileManager->InitDB($this->getDBHost(), $this->getDBUserName(), $this->getDBPassword(), $this->getDBName());
         
+        foreach($allFileIds as $fileid) {
+            try {
+                $fileManager->deleteFileFromFileSystem($fileid);
+            } catch(Exception $exc) {}
+        }
+
         $this->connection = $this->ConnectDB();
 
         if ($this->connection == NULL) {
@@ -198,7 +210,7 @@ class Notice extends DBConnect{
             }
             return FALSE;
         }
-
+        
         $qry = "DELETE FROM files WHERE id_file in ($fileIds)";
 
         if (!mysql_query($qry, $this->connection)) {
