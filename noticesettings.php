@@ -63,9 +63,9 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     if(i != 0) {
                         attachedFiles += ',';
                     }
-                        attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
+                    attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
 
-                    linkrows += '<tr><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
+                    linkrows += '<tr id="notice'+noticeId+'file'+fileId+'"><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
                 }
             }
             
@@ -157,7 +157,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     }
                     attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
 
-                    linkrows += '<tr id="noticefile'+fileId+'"><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
+                    linkrows += '<tr id="notice'+noticeId+'file'+fileId+'"><td><a href="'+fileLocation+'">'+fileName+'</a></td></tr>';
                 }
             }
             
@@ -202,7 +202,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                         }
                         attachedFiles += fileId + '|' + fileName + '|' + fileType + '|' + fileSize + '|' + fileLocation;
                     } else {
-                        $('#noticefile' + fileId).remove();
+                        $('#notice'+noticeId+'file'+fileId).remove();
                     }
                 }
             }
@@ -348,11 +348,11 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                     <th></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="notice">
                 <?php
                 foreach($allNotices as $noticeInfo) {
                 ?>
-                <tr id="tr<?php echo $noticeInfo->getId() ?>">
+                <tr id="tr<?php echo $noticeInfo->getId(); ?>">
                     <td id="tdtitle<?php echo $noticeInfo->getId() ?>" style="width: 25%;"><?php echo $noticeInfo->getTitle(); ?></td>
                     <td id="tdtext<?php echo $noticeInfo->getId() ?>"><?php echo $noticeInfo->getText(); ?></td>
                     <td>
@@ -369,14 +369,14 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                                 $attachedFileStr .= ",";
                             }
                             ?>
-                                <tr id="noticefile<?php echo $allFiles[$fi]->getId() ?>"><td><a href="<?php echo $allFiles[$fi]->getLocation(); ?>"><?php echo $allFiles[$fi]->getName(); ?></a></td></tr>
+                                <tr id="notice<?php echo $noticeInfo->getId(); ?>file<?php echo $allFiles[$fi]->getId(); ?>"><td><a href="<?php echo $allFiles[$fi]->getLocation(); ?>"><?php echo $allFiles[$fi]->getName(); ?></a></td></tr>
                             <?php
                             $attachedFileStr .= $allFiles[$fi]->getId()."|".$allFiles[$fi]->getName()."|".$allFiles[$fi]->getType()."|".$allFiles[$fi]->getSize()."|".$allFiles[$fi]->getLocation();
                         }
                         ?>
                             </tbody>
                         </table>
-                        <input type="hidden" id="attachedfiles<?php echo $noticeInfo->getId() ?>" value="<?php echo $attachedFileStr; ?>"></input>
+                        <input type="hidden" id="attachedfiles<?php echo $noticeInfo->getId(); ?>" value="<?php echo $attachedFileStr; ?>"></input>
                     </td>
                     <td style="width: 10px;">
                         <span class="icon ui-icon ui-icon-pencil" title="edit" onclick="editNotice('<?php echo $noticeInfo->getId(); ?>')"></span>
@@ -510,7 +510,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                                 data: dataString,
                                 success: function(response){
                                     if(response > 0) {
-                                        $( "#notices tbody" ).append( getNoticeRowString(response, notice_title.val(), notice_txt.val() ) );
+                                        $( "#notices tbody.notice" ).append( getNoticeRowString(response, notice_title.val(), notice_txt.val() ) );
                                         clearDialogFields();
                                         $( thisdialog ).dialog( "close" );
                                     } else if(response=="success"){
