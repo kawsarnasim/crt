@@ -82,6 +82,9 @@
                         <li>
                             <a href="publicationsettings.php">Publication Settings</a>
                         </li>
+                        <li>
+                            <a href="researchsettings.php">Research Settings</a>
+                        </li>
                     </ul>
                 </div>
             </div>

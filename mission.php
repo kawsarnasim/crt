@@ -1,5 +1,5 @@
 <?php
-include 'header2.php';
+include 'header.php';
 ?>
 
 <div id="main_content" align="center">

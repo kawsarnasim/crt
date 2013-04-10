@@ -30,7 +30,7 @@ CREATE TABLE `files` (
   `location` varchar(120) DEFAULT NULL,
   `upload_date_time` datetime NOT NULL,
   PRIMARY KEY (`id_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `notices` (
   `lastupdatedatetime` datetime NOT NULL,
   `creationdatetime` datetime NOT NULL,
   PRIMARY KEY (`id_notice`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +67,62 @@ CREATE TABLE `notices` (
 LOCK TABLES `notices` WRITE;
 /*!40000 ALTER TABLE `notices` DISABLE KEYS */;
 /*!40000 ALTER TABLE `notices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `researches`
+--
+
+DROP TABLE IF EXISTS `researches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `researches` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) DEFAULT NULL,
+  `description` text,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `creationdatetime` datetime DEFAULT NULL,
+  `lastupdatetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `researches`
+--
+
+LOCK TABLES `researches` WRITE;
+/*!40000 ALTER TABLE `researches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `researches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trainings`
+--
+
+DROP TABLE IF EXISTS `trainings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainings` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) DEFAULT NULL,
+  `description` text,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `creationdatetime` datetime DEFAULT NULL,
+  `lastupdatetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainings`
+--
+
+LOCK TABLES `trainings` WRITE;
+/*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -134,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-30 23:13:36
+-- Dump completed on 2013-04-11  3:05:01

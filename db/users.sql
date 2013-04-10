@@ -33,7 +33,7 @@ CREATE  TABLE notices (
   notice_text VARCHAR(45) NULL ,
   creationdatetime DATE NOT NULL,
   lastupdatedatetime DATE NOT NULL,
-  PRIMARY KEY (`id_notice`)
+  PRIMARY KEY ( id_notice )
 )ENGINE=InnoDB;
 
 #Table Files:
@@ -45,4 +45,32 @@ CREATE  TABLE files (
   location VARCHAR(120) NULL ,
   upload_date_time DATETIME NOT NULL ,
   PRIMARY KEY (id_file)
+)ENGINE=InnoDB;
+
+ALTER TABLE `crtdb`.`researches` ADD COLUMN `enddate` DATE NULL  AFTER `startdate` , CHANGE COLUMN `status` `startdate` DATE NULL  ;
+
+
+#Table Researches:
+CREATE  TABLE researches (
+    id  BIGINT NOT NULL AUTO_INCREMENT,
+    title  VARCHAR(45) NULL,
+    description  TEXT NULL,
+    startdate  DATE NULL,
+    enddate  DATE NULL,
+    creationdatetime  DATETIME NULL,
+    lastupdatetime  DATETIME NULL,
+    PRIMARY KEY ( id ) 
+)ENGINE=InnoDB;
+
+
+#Table Training:
+CREATE  TABLE trainings (
+    id  BIGINT NOT NULL AUTO_INCREMENT,
+    title  VARCHAR(45) NULL,
+    description  TEXT NULL,
+    startdate  DATE NULL,
+    enddate  DATE NULL,
+    creationdatetime  DATETIME NULL,
+    lastupdatetime  DATETIME NULL,
+    PRIMARY KEY ( id ) 
 )ENGINE=InnoDB;

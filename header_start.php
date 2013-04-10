@@ -21,6 +21,25 @@
         <script type="text/javascript" src="js/header-image-slide.js"></script>
 
         <script type="text/javascript">
+            
+            $(document).ready(function() {
+
+                $("li.dropdown").mouseenter(function(){
+                    $(this).find(".page_menu_dropdown").show();
+                    //alert($(this).find(".page_menu_dropdown").text());
+                });
+                
+                $("ul.page_menu_dropdown").mouseenter(function(){
+                    $(this).show();
+                    //alert($(this).find(".page_menu_dropdown").text());
+                });
+
+                $("li.dropdown").mouseleave(function(){
+                    $(this).find(".page_menu_dropdown").hide();
+                });
+                
+            });
+            
             function toggle_visibility(id) {
                 var e = document.getElementById(id);
                 $(e).toggle(300);
@@ -39,6 +58,7 @@
             function logout() {
                 document.location =  'logout.php';
             }
+            
         </script>
     </head>
 
@@ -66,10 +86,25 @@
 
             <div id="page_menu">
 
-                <ul>
+                <ul class="level1">
                     <li class="first"><a href="index.php">Home</a></li>
-                    <li><a href="views/research.php">Research</a></li>
-                    <li><a href="views/training.php">Training</a></li>
+<!--                    <li><a href="views/research.php">Research</a></li>-->
+                    <li class="dropdown">
+                        <a href="">Research</a>
+                        <ul class="page_menu_dropdown" style="position: absolute;display:none;">
+                            <li><a href="research.php?rtype=ongoing">Ongoing</a></li>
+                            <li><a href="research.php?rtype=completed">Completed</a></li>
+                            <li><a href="research.php?rtype=upcoming">Upcoming</a></li>                                
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="">Training</a>
+                        <ul class="page_menu_dropdown" style="position: absolute;display:none;">
+                            <li><a href="training.php?ttype=ongoing">Ongoing</a></li>
+                            <li><a href="training.php?ttype=completed">Completed</a></li>
+                            <li><a href="training.php?ttype=upcoming">Upcoming</a></li>                                
+                        </ul>
+                    </li>
                     <li><a href="views/consultancy.php">Consultancy</a></li>
                     <li><a href="views/staff.php">Staff</a></li>
                     <li><a href="views/advisors.php">Advisors</a></li>
