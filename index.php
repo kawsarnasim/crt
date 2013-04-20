@@ -9,7 +9,7 @@ include 'header.php';
         <p><h1>Online Registration System</h1></p>
     </div>
     <div>
-        <div style="float: left;">Submit your application via Online Registration System</div>
+        <div style="float: left;font-size: 12pt;margin-left: 5px;">Submit your application via Online Registration System</div>
         <div><button onclick="document.location='register.php'">Click Here</button></div>
     </div>
 

@@ -38,4 +38,11 @@ body { background-color:#1b2940; font:62.5% Georgia,'Times New Roman',serif; let
 #headernav-outer { position:absolute; top:380px; margin:0 auto; width:960px; }
 #headernav { padding-left:425px; }
 
+/* HEADER TEXT */
+#headertxt { width:960px; margin:0 auto; clear:both; position:absolute; top:250px; padding-left: 20px;}
+#firstline { background-image:url("../images/slideshow/textbg.png"); color:#333; font-size:14px; padding:4px 13px 7px; float:left; display:block; }
+#secondline { background-image:url("../images/slideshow/textbg.png"); color:#CD2B3A; text-decoration:none; font-size:18px; padding:0 13px 10px; float:left; display:block; clear:both; }
+#secondline:hover { text-decoration:underline; color:#7F000C; }
+
+
 

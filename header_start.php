@@ -26,12 +26,10 @@
 
                 $("li.dropdown").mouseenter(function(){
                     $(this).find(".page_menu_dropdown").show();
-                    //alert($(this).find(".page_menu_dropdown").text());
                 });
                 
                 $("ul.page_menu_dropdown").mouseenter(function(){
                     $(this).show();
-                    //alert($(this).find(".page_menu_dropdown").text());
                 });
 
                 $("li.dropdown").mouseleave(function(){
@@ -92,17 +90,17 @@
                     <li class="dropdown">
                         <a href="">Research</a>
                         <ul class="page_menu_dropdown" style="position: absolute;display:none;">
-                            <li><a href="research.php?rtype=ongoing">Ongoing</a></li>
-                            <li><a href="research.php?rtype=completed">Completed</a></li>
-                            <li><a href="research.php?rtype=upcoming">Upcoming</a></li>                                
+                            <li><a href="researches.php?rtype=ongoing">Ongoing</a></li>
+                            <li><a href="researches.php?rtype=completed">Completed</a></li>
+                            <li><a href="researches.php?rtype=upcoming">Upcoming</a></li>                                
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="">Training</a>
                         <ul class="page_menu_dropdown" style="position: absolute;display:none;">
-                            <li><a href="training.php?ttype=ongoing">Ongoing</a></li>
-                            <li><a href="training.php?ttype=completed">Completed</a></li>
-                            <li><a href="training.php?ttype=upcoming">Upcoming</a></li>                                
+                            <li><a href="trainings.php?ttype=ongoing">Ongoing</a></li>
+                            <li><a href="trainings.php?ttype=completed">Completed</a></li>
+                            <li><a href="trainings.php?ttype=upcoming">Upcoming</a></li>                                
                         </ul>
                     </li>
                     <li><a href="views/consultancy.php">Consultancy</a></li>

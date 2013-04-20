@@ -17,109 +17,39 @@ class Research extends DBConnect{
     
     function getAllResearches() {
         
-        $researchInfoArray = array();
-        $this->connection=$this->ConnectDB();
-        if($this->connection==NULL) {
-            try {
-                $this->CloseConnectionDB();
-            } catch(Exception $exc) {}
-            return $researchInfoArray;
-        }
-        $qry = "SELECT * FROM researches";
-        $result = mysql_query($qry, $this->connection);
-
-        if (!$result || mysql_num_rows($result) <= 0) {
-            try {
-                $this->CloseConnectionDB();
-            } catch(Exception $exc) {}
-            return $researchInfoArray;
-        }
+        $researchInfoArray = $this->getResearchesByQuery("SELECT * FROM researches ORDER BY startdate DESC, enddate DESC, title ASC");
         
-        while( $row = mysql_fetch_array($result) ) {
-            $researchInfo = new ResearchInfo();
-            $researchInfo->setId($row['id']);
-            $researchInfo->setTitle($row['title']);
-            $researchInfo->setDescription($row['description']);
-            
-            $startDate = strtotime($row['startdate']);
-            $endDate = strtotime($row['enddate']);
-            $curDate = time();
-            
-            $researchInfo->setStartDate($row['startdate']);
-            $researchInfo->setEndDate($row['enddate']);
-            
-            if($startDate <= $curDate && $curDate <= $endDate) {
-                $researchInfo->setStatus(Research::$ONGOING);
-            } else if($curDate > $endDate) {
-                $researchInfo->setStatus(Research::$COMPLETED);
-            } else if($curDate < $startDate) {
-                $researchInfo->setStatus(Research::$UPCOMING);
-            }
-            
-            $researchInfo->setCreationDateTime($row['creationdatetime']);
-            $researchInfo->setUpdateTime($row['lastupdatetime']);
-            
-            $researchInfoArray[]=$researchInfo;
-        }
-
-        try {
-            $this->CloseConnectionDB();
-        } catch(Exception $exc) {}
+        return $researchInfoArray;        
+    }
+    
+    function getOngoingResearches() {
         
-        return $researchInfoArray;
+        $researchInfoArray = $this->getResearchesByQuery("SELECT * FROM researches WHERE startdate <= CURDATE() and enddate >= CURDATE()");
         
-    } // End of getAllNotices() method
+        return $researchInfoArray;        
+    }
+    
+    function getPastResearches() {
+        
+        $researchInfoArray = $this->getResearchesByQuery("SELECT * FROM researches WHERE enddate < CURDATE()");
+        
+        return $researchInfoArray;        
+    }
+    
+    function getFutureResearches() {
+        
+        $researchInfoArray = $this->getResearchesByQuery("SELECT * FROM researches WHERE startdate > CURDATE()");
+        
+        return $researchInfoArray;        
+    }
     
     function getResearchInfo($researchId) {
-        $researchInfo = NULL;
-        $this->connection=$this->ConnectDB();
-        if($this->connection==NULL) {
-            try {
-                $this->CloseConnectionDB();
-            } catch(Exception $exc) {}
-            return $researchInfo;
-        }
-        $qry = "SELECT * FROM researches WHERE id=$researchId";
-        $result = mysql_query($qry, $this->connection);
-
-        if (!$result || mysql_num_rows($result) <= 0) {
-            try {
-                $this->CloseConnectionDB();
-            } catch(Exception $exc) {}
-            return $researchInfo;
-        }
         
-        $row = mysql_fetch_array($result);
+        $researchInfoArray = $this->getResearchesByQuery("SELECT * FROM researches WHERE id=$researchId");
         
-        $researchInfo = new ResearchInfo();
-        $researchInfo->setId($row['id']);
-        $researchInfo->setTitle($row['title']);
-        $researchInfo->setDescription($row['description']);
+        $researchInfo = (count($researchInfoArray)==0) ? NULL : $researchInfoArray[0];        
         
-        $startDate = strtotime($row['startdate']);
-        $endDate = strtotime($row['enddate']);
-        $curDate = time();
-
-        $researchInfo->setStartDate($row['startdate']);
-        $researchInfo->setStartDate($row['enddate']);
-
-        if($startDate <= $curDate && $curDate <= $endDate) {
-            $researchInfo->setStatus(Research::$ONGOING);
-        } else if($curDate > $endDate) {
-            $researchInfo->setStatus(Research::$COMPLETED);
-        } else if($curDate < $startDate) {
-            $researchInfo->setStatus(Research::$UPCOMING);
-        }
-        
-        $researchInfo->setCreationDateTime($row['creationdatetime']);
-        $researchInfo->setUpdateTime($row['lastupdatetime']);
-
-        try {
-            $this->CloseConnectionDB();
-        } catch(Exception $exc) {}
-        
-        return $researchInfo;
-        
+        return $researchInfo;        
     }
         
     /**
@@ -219,6 +149,64 @@ class Research extends DBConnect{
         } catch(Exception $exc) {}
                 
         return "success";
+    }
+    
+    private function getResearchInfoFromRow($row) {
+        $researchInfo = new ResearchInfo();
+        $researchInfo->setId($row['id']);
+        $researchInfo->setTitle($row['title']);
+        $researchInfo->setDescription($row['description']);
+
+        $startDate = strtotime($row['startdate']);
+        $endDate = strtotime($row['enddate']);
+        $curDate = time();
+
+        $researchInfo->setStartDate($row['startdate']);
+        $researchInfo->setEndDate($row['enddate']);
+
+        if($startDate <= $curDate && $curDate <= $endDate) {
+            $researchInfo->setStatus(Research::$ONGOING);
+        } else if($curDate > $endDate) {
+            $researchInfo->setStatus(Research::$COMPLETED);
+        } else if($curDate < $startDate) {
+            $researchInfo->setStatus(Research::$UPCOMING);
+        }
+
+        $researchInfo->setCreationDateTime($row['creationdatetime']);
+        $researchInfo->setUpdateTime($row['lastupdatetime']);
+        
+        return $researchInfo;
+    }
+    
+    private function getResearchesByQuery($query) {
+        $researchInfoArray = array();
+        $this->connection=$this->ConnectDB();
+        if($this->connection==NULL) {
+            try {
+                $this->CloseConnectionDB();
+            } catch(Exception $exc) {}
+            return $researchInfoArray;
+        }
+        
+        $result = mysql_query($query, $this->connection);
+
+        if (!$result || mysql_num_rows($result) <= 0) {
+            try {
+                $this->CloseConnectionDB();
+            } catch(Exception $exc) {}
+            return $researchInfoArray;
+        }
+        
+        while( $row = mysql_fetch_array($result) ) {
+            $researchInfo = $this->getResearchInfoFromRow($row);
+            $researchInfoArray[]=$researchInfo;
+        }
+
+        try {
+            $this->CloseConnectionDB();
+        } catch(Exception $exc) {}
+        
+        return $researchInfoArray;
     }
     
 }

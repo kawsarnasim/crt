@@ -33,6 +33,14 @@ include 'header_start.php';
             <div id="next" class="btn"></div>
         </div>
     </div>
+
+    <!-- jQuery handles for the text displayed on top of the images -->
+    <div id="headertxt">
+        <p class="caption">
+            <span id="firstline"></span>
+            <a href="#" id="secondline"></a>
+        </p>
+    </div>
 </div>
 
 <?php
