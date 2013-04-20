@@ -88,7 +88,7 @@
                     <li class="first"><a href="index.php">Home</a></li>
 <!--                    <li><a href="views/research.php">Research</a></li>-->
                     <li class="dropdown">
-                        <a href="">Research</a>
+                        <a href="#">Research</a>
                         <ul class="page_menu_dropdown" style="position: absolute;display:none;">
                             <li><a href="researches.php?rtype=ongoing">Ongoing</a></li>
                             <li><a href="researches.php?rtype=completed">Completed</a></li>
@@ -96,7 +96,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="">Training</a>
+                        <a href="#">Training</a>
                         <ul class="page_menu_dropdown" style="position: absolute;display:none;">
                             <li><a href="trainings.php?ttype=ongoing">Ongoing</a></li>
                             <li><a href="trainings.php?ttype=completed">Completed</a></li>

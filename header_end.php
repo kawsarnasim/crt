@@ -1,6 +1,6 @@
 <div id="search_location_bar">
     <div id="current_location">
-        You are here:
+        <table><tr><td><span class=" icon ui-icon ui-icon-info"></span></td><td>This site is under construction</td></tr></table>
     </div>
     <div id="page_headersearch">
         <h3>Search:</h3>

@@ -24,7 +24,7 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
         span.ui-icon { cursor: pointer;}
     </style>
 
-<!--    <script src="js/jquery.form.js"></script>-->
+    <script src="js/jquery.form.js"></script>
     
     <script>
         // collected from: http://blog.stevenlevithan.com/archives/faster-trim-javascript
@@ -295,9 +295,9 @@ if($loggedin && $usertype==1) { // Page content can be accessed only if loggedin
                 success: function(response){  
                     if(response == "success") {
                         removeFileRowFromDialog( fid );
-                    } else {
+                    } /*else {
                         updateTips("Database error, could not delete file ("+fid+")");
-                    }
+                    }*/
                 }
             });
         }
