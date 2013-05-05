@@ -3,24 +3,12 @@
         <table><tr><td><span class=" icon ui-icon ui-icon-info"></span></td><td>This site is under construction</td></tr></table>
     </div>
     <div id="page_headersearch">
-        <h3>Search:</h3>
-
+        
         <form>
             <div>
                 <input type="text" class="searchtext" />
-                <input type="button" value="Submit" class="button" onclick="search()"/>
-                <?php
-                if (!$loggedin) {
-                    ?>
-                    <input type="button" value="Login" class="button" onclick="login()"/>
-                    <?php
-                } else {
-                    ?>
-                    <input type="button" value="Logout" class="button" onclick="logout()"/>
-                    <?php
-                }
-                ?>
-
+                <input type="button" value="Search" class="button" onclick="search()"/>
+                
                 <div class="clearthis">&nbsp;</div>
             </div>
         </form>
@@ -36,9 +24,6 @@
     <!-- Start of Categories Box -->
 
     <div id="categories">
-        <div id="categories_header">
-            <h2>Menu</h2>
-        </div>
 
         <div class="first">
             <a  onclick="javascript:toggle_visibility('about_crt')">About CRT</a><br />
@@ -48,13 +33,7 @@
                         <a href="whoweare.php">Who we are</a>
                     </li>
                     <li>
-                        <a href="index.php">Our civics</a>
-                    </li>
-                    <li>
-                        <a href="vision.php">Vision</a>
-                    </li>
-                    <li>
-                        <a href="mission.php">Mission</a>
+                        <a href="mission.php">Vision & Mission</a>
                     </li>
                     <li>
                         <a href="values.php">Values</a>
@@ -91,15 +70,29 @@
         <?php
         }
         ?>
-        <div><a href="#">Downloads</a></div>
+        <div><a href="downloads.php">Downloads</a></div>
         <?php
         if ($usertype == 1 || $usertype == 2) {
             ?>
-            <div class="last"><a href="#">Admin</a></div>
+            <div><a href="#">Admin</a></div>
             <?php
         } else {
             ?>
-            <div class="last"><a href="#">Contact Us</a></div>
+            <div><a href="#">Contact Us</a></div>
+            <?php
+        }
+        ?>
+            
+        <?php
+        if (!$loggedin) {
+            ?>
+            <div class="last"><a href="login.php">Sign in</a></div>
+<!--            <input type="button" value="Login" class="button" onclick="login()"/>-->
+            <?php
+        } else {
+            ?>
+            <div class="last"><a href="logout.php">Sign out</a></div>
+<!--            <input type="button" value="Logout" class="button" onclick="logout()"/>-->
             <?php
         }
         ?>
@@ -107,7 +100,6 @@
 
         <!--			<div class="clearthis">&nbsp;</div>-->
     </div>
-
     <!-- End of Categories Box -->
 
 

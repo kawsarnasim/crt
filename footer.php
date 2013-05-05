@@ -10,7 +10,7 @@
             <div id="publication">
                 <table>
                     <tr>
-                        <th> Publications</th>
+                        <td class="first"> Publications</td>
                     </tr>
                     <tr>
                         <td>
@@ -23,9 +23,9 @@
             <div id="noticeboard">
                 <table>
                     <tr>
-                        <th>
+                        <td class="first">
                             Notices
-                        </th>
+                        </td>
                     </tr>
                     <?php
                     foreach($allNotices as $noticeInfo) {

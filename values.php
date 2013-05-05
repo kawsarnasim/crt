@@ -9,11 +9,8 @@ if ($fgmembersite->CheckLogin()) {
     $usertype = 3;
 }
 
-if($usertype == 1) {
-    include 'header2.php';
-} else {
-    include 'header.php';
-}
+include 'header2.php';
+
 ?>
 
 <div id="main_content" align="center">
@@ -22,8 +19,9 @@ if($usertype == 1) {
         <div class="topic_head">
             Values
         </div>
-        <p>These serve as guidelines for our conduct and behavior as we work towards our vision.</p>
+        
         <div class="topic_body">
+            <p>These serve as guidelines for our conduct and behavior as we work towards our vision.</p>
             <ul>
                 <li><b>Quality</b> - our focus is on the people we serve and we will strive for excellence through evaluation and continuous improvement.</li>
                 <li><b>Caring</b> - we are committed to serving with empathy and compassion.</li>

@@ -9,15 +9,20 @@ if ($fgmembersite->CheckLogin()) {
     $usertype = 3;
 }
 
-if($usertype == 1) {
-    include 'header2.php';
-} else {
-    include 'header.php';
-}
+include 'header2.php';
+
 ?>
 
 <div id="main_content" align="center">
-    
+    <div class="topic">
+        <div class="topic_head">
+            Vision
+        </div>
+        <div class="topic_body">
+            Creating a better world by working for a richer economy.
+        </div>
+    </div>
+    <br/>
     <div class="topic">
         <div class="topic_head">
             Mission

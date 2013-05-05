@@ -69,8 +69,11 @@
             <div id="page_header">
 
                 <div id="page_heading">
-                    <img src="images/heading/crtheading.png" height="150px" width="825px"/>
-                    <img id="globe" src="images/heading/spinning_globe.gif" height="125px" width="125px"/>
+<!--                    <img src="images/heading/crtheading.png" height="150px" width="825px"/>
+                    <img id="globe" src="images/heading/spinning_globe.gif" height="125px" width="125px"/>-->
+<!--                    <img src="images/heading/crtbanner.png" height="90px" width="950px"/>-->
+<!--                    <img src="images/heading/crtbanner_blue_map.png" height="90px" width="950px"/>-->
+                    <img src="images/heading/crtbanner_globe.png" height="90px" width="950px"/>
                 </div>
 
                 <div class="clearthis">&nbsp;</div>

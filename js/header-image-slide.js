@@ -1,6 +1,6 @@
 
 // Speed of the automatic slideshow
-var slideshowSpeed = 6000;
+var slideshowSpeed = 7500;
 
 // Variable to store the images we need to set as background
 // which also includes some text and url's.
@@ -8,116 +8,98 @@ var photos = [ {
     "title" : "Stairs",
     "image" : "DSC00114.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Participants in the training program",
+    "secondline" : ""
 }, {
     "title" : "Office Appartments",
     "image" : "DSC00117.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Participants in the training program",
+    "secondline" : ""
 }, {
-    "title" : "Mountainbiking",
+    "title" : "",
     "image" : "DSC00118.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Participants in the training program",
+    "secondline" : ""
 }, {
-    "title" : "Mountainbiking",
+    "title" : "",
     "image" : "DSC00121.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Some moments in the training program",
+    "secondline" : ""
 }, {
-    "title" : "Mountainbiking",
+    "title" : "",
     "image" : "DSC00123.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Assistant Professor Suman Kanti Das delivering his lecture",
+    "secondline" : ""
 }, {
-    "title" : "Mountains Landscape",
+    "title" : "",
     "image" : "DSC00124.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Assistant Professor Suman Kanti Das delivering his lecture",
+    "secondline" : ""
 }, {
-    "title" : "Italian pizza",
+    "title" : "",
     "image" : "DSC00127.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Assistant Professor Suman Kanti Das delivering his lecture",
+    "secondline" : ""
 }, {
-    "title" : "Naval Academy",
+    "title" : "",
     "image" : "IMG_0003.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Welcome speech in Training by Prof. Dr. Md. Saleh Uddin",
+    "secondline" : ""
 }, {
-    "title" : "Naval Academy",
+    "title" : "",
     "image" : "IMG_0006.JPG",
     "url" : "#",
     "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "secondline" : ""
 }, {
-    "title" : "Naval Academy",
-    "image" : "IMG_9959.JPG",
-    "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
-}, {
-    "title" : "Naval Academy",
+    "title" : "",
     "image" : "IMG_9961.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Some moments in the training program",
+    "secondline" : ""
 }, {
-    "title" : "Chrysanthemum",
+    "title" : "",
     "image" : "IMG_9966.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Guests in the training program",
+    "secondline" : ""
 }, {
-    "title" : "Desert",
-    "image" : "IMG_9968.JPG",
-    "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
-}, {
-    "title" : "Hydrangeas",
-    "image" : "IMG_9969.JPG",
-    "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
-}, {
-    "title" : "Jellyfish",
+    "title" : "",
     "image" : "IMG_9972.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Moments of the opening ceremony",
+    "secondline" : ""
 }, {
-    "title" : "Jellyfish",
+    "title" : "",
     "image" : "IMG_9989.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Speech given by participants",
+    "secondline" : ""
 }, {
-    "title" : "Koala",
+    "title" : "",
     "image" : "IMG_9992.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Speech given by participants",
+    "secondline" : ""
 }, {
-    "title" : "Koala",
+    "title" : "",
     "image" : "IMG_9997.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Welcome speech given by Prof. Dr. Kabir Hossain, Director, University Research Centre",
+    "secondline" : ""
 }, {
-    "title" : "Koala",
+    "title" : "",
     "image" : "IMG_9998.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
-    "secondline" : "Would be shown here"
+    "firstline" : "Some moments in the training program",
+    "secondline" : ""
 }
 ];
 
