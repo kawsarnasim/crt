@@ -40,8 +40,8 @@ body { background-color:#1b2940; font:62.5% Georgia,'Times New Roman',serif; let
 
 /* HEADER TEXT */
 #headertxt { width:946px; margin-left: auto; top:356px; margin-right: auto; display: inline-block; clear:both; position:absolute;}
-#firstline { background-image:url("../images/slideshow/textbg.png"); color:#000; font-size:13pt; padding:4px 13px 7px; float:left; text-align: center;margin-left: auto; margin-right: auto; display: inline-block; width: 97%; }
-#secondline { background-image:url("../images/slideshow/textbg.png"); color:#000; text-decoration:none; font-size:18px; padding:0 13px 10px; float:left; clear:both; text-align: center;margin-left: auto; margin-right: auto; display: inline-block; width: 97%; }
+#firstline { background-image:url("../images/slideshow/textbg_black.png"); color:#FFF; font-size:13pt; padding:4px 13px 7px; float:left; text-align: center;margin-left: auto; margin-right: auto; display: inline-block; width: 97%; }
+#secondline { background-image:url("../images/slideshow/textbg_black.png"); color:#FFF; text-decoration:none; font-size:18px; padding:0 13px 10px; float:left; clear:both; text-align: center;margin-left: auto; margin-right: auto; display: inline-block; width: 97%; }
 #secondline:hover { text-decoration:underline; color:#7F000C; }
 
 

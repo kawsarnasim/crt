@@ -49,6 +49,7 @@ p {
     border-width: 0px 1px 1px;
     background: #FFFFFF;
     font-family: Verdana;
+    /*font-family: Arial,Helvetica,sans-serif;*/
     border-style: solid;
 }
 
@@ -106,6 +107,36 @@ input {
     text-align: center;
     font-size: 13pt;
 }
+
+#page_menu ul li ul{
+    width: 113px;
+    height: 87px;
+    position: absolute;
+    
+    background: #B0B0B0;
+    background: -moz-linear-gradient(top, #B0B0B0, #808080);
+    background: -ms-linear-gradient(top, #B0B0B0, #808080);
+    background: -o-linear-gradient(top, #B0B0B0, #808080);
+    background: -webkit-linear-gradient(top, #B0B0B0, #808080);
+    background: linear-gradient(top, #B0B0B0, #808080);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#B0B0B0', EndColorStr='#808080');
+    
+    z-index: 5;
+}
+
+#page_menu ul li ul li{
+    display: inline-block;
+    width: 100%;
+    float: none;
+    background: none;
+    filter: none;
+}
+
+#page_menu ul li ul li a {
+    height: 29px;
+    padding-top: 0px;
+}
+
 
 #page_menu li.first {
     margin-left: 0px;

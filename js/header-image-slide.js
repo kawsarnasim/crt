@@ -56,7 +56,7 @@ var photos = [ {
     "title" : "",
     "image" : "IMG_0006.JPG",
     "url" : "#",
-    "firstline" : "Description of the image",
+    "firstline" : "Welcome speech in Training by Prof. Dr. Md. Saleh Uddin",
     "secondline" : ""
 }, {
     "title" : "",
