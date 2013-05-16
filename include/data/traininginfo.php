@@ -7,6 +7,8 @@ class TrainingInfo {
     private $id;
     private $title;
     private $description;
+    private $startDate;
+    private $endDate;
     private $status;
     private $createDateTime;
     private $updateDateTime;
@@ -31,7 +33,7 @@ class TrainingInfo {
         $this->title = $rtitle;
     }
     
-    public function getDesrciption() {
+    public function getDescription() {
         return $this->description;
     }
     
@@ -45,6 +47,22 @@ class TrainingInfo {
     
     public function setStatus($rstatus) {
         $this->status = $rstatus;
+    }
+    
+    public function getStartDate() {
+        return $this->startDate;
+    }
+    
+    public function setStartDate($rstartdate) {
+        $this->startDate = $rstartdate;
+    }
+    
+    public function getEndDate() {
+        return $this->endDate;
+    }
+    
+    public function setEndDate($renddate) {
+        $this->endDate = $renddate;
     }
     
     public function getCreationDateTime() {

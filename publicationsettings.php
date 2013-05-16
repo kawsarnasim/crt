@@ -9,11 +9,11 @@ include 'header2.php';
             Publication Settings
         </div>
         <div>
-            Here are the publication settings
+            Publication setting feature is not ready yet.
         </div>
     </div>
 
 
 <?php
-include 'footer.php';
+include 'footer2.php';
 ?>

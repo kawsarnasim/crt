@@ -106,10 +106,10 @@
                             <li><a href="trainings.php?ttype=upcoming">Upcoming</a></li>                                
                         </ul>
                     </li>
-                    <li><a href="views/consultancy.php">Consultancy</a></li>
-                    <li><a href="views/staff.php">Staff</a></li>
-                    <li><a href="views/advisors.php">Advisors</a></li>
-                    <li><a href="views/webmail.php">Webmail</a></li>
+                    <li><a href="consultancy.php">Consultancy</a></li>
+                    <li><a href="staff.php">Staff</a></li>
+                    <li><a href="advisors.php">Advisors</a></li>
+                    <li><a href="http://webmail.crtbd.org/" target="_blank">Webmail</a></li>
                     <li class="last"><a href="register.php">Online Registration</a></li>
                 </ul>
 

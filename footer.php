@@ -5,6 +5,8 @@
     $notice->InitDB( $dbhost, $dbusername, $dbpwd, $dbname);
     $allNotices = $notice->getAllNotices();
 ?>
+    
+    
     </div>    
         <div id="right_sidebar">
             <div id="publication">

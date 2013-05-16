@@ -5,10 +5,13 @@ require_once("./include/fg_membersite.php");
 $fgmembersite = new FGMembersite();
 
 //Provide your site name here
-$fgmembersite->SetWebsiteName('crtbd.com');
+$fgmembersite->SetWebsiteName('crtbd.org');
 
 //Provide the email address where you want to get notifications
-$fgmembersite->SetAdminEmail('kawsar.nasim@yahoo.com');
+$fgmembersite->SetAdminEmail('admin@crtbd.org');
+
+//Provide the email address where you want to get contact notifications
+$fgmembersite->SetInfoEmail('info@crtbd.org');
 
 //Provide your database login details here:
 //hostname, user name, password, database name and table name

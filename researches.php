@@ -1,10 +1,10 @@
 <?php
 require_once("properties.php");
 require_once("./include/util/research.php");
-include 'header.php';
+include 'header2.php';
 
 $query_str = $_SERVER['QUERY_STRING'];
-$rtype= 'nothing';
+$rtype= '';
 
 if( strcmp($query_str, '') != 0 ) {
     $rtypearray = preg_split('/[=]/', $query_str);
@@ -35,25 +35,35 @@ if(strcmp($rtype, "ongoing")==0){
         </div>
 
         <?php
-        foreach($researches as $researchInfo) {
-        ?>
-            <div class="topic_body">
-                <div>
-                    <table cellpadding="0" cellspacing="1">
-                        <tr>
-                            <th>
-                                <?php echo $researchInfo->getTitle(); ?>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <?php echo $researchInfo->getDescription(); ?>
-                            </td>
-                        </tr>
-                    </table>
+        if(count($researches) > 0) {
+            foreach($researches as $researchInfo) {
+            ?>
+                <div class="topic_body">
+                    <div>
+                        <table cellpadding="0" cellspacing="1">
+                            <tr>
+                                <th>
+                                    <?php echo $researchInfo->getTitle(); ?>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php echo $researchInfo->getDescription(); ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        <?php
+            <?php
+            }
+        } else {
+            ?>
+                <div class="topic_body">
+                    <div>
+                        There is no <?php echo $rtype; ?> research available to show at the moment.
+                    </div>
+                </div>
+            <?php
         }
         ?>
     </div>

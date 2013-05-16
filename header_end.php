@@ -35,22 +35,20 @@
                     <li>
                         <a href="mission.php">Vision & Mission</a>
                     </li>
-                    <li>
-                        <a href="values.php">Values</a>
-                    </li>
                     <li class="last">
-                        <a href="index.php">Strategies</a>
+                        <a href="values.php">Values</a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div><a href="#">Vacancy</a></div>
-        <div><a href="#">Press</a></div>
-        <div><a href="#">Photo Gallery</a></div>
+        <div><a href="vacancy.php">Vacancy</a></div>
+        <div><a href="photogallery.php">Photo Gallery</a></div>
+        
+        <div><a href="downloads.php">Downloads</a></div>
         <?php
-        if($usertype==1) {
-        ?>
+        if ($usertype == 1 || $usertype == 2) {
+            ?>
             <div>
                 <a  onclick="javascript:toggle_visibility('admin_panel')">Admin Panel</a><br />
                 <div style="display: inline;" id="admin_panel">
@@ -64,21 +62,16 @@
                         <li>
                             <a href="researchsettings.php">Research Settings</a>
                         </li>
+                        <li>
+                            <a href="trainingsettings.php">Training Settings</a>
+                        </li>
                     </ul>
                 </div>
             </div>
-        <?php
-        }
-        ?>
-        <div><a href="downloads.php">Downloads</a></div>
-        <?php
-        if ($usertype == 1 || $usertype == 2) {
-            ?>
-            <div><a href="#">Admin</a></div>
             <?php
         } else {
             ?>
-            <div><a href="#">Contact Us</a></div>
+            <div><a href="contact-us.php">Contact Us</a></div>
             <?php
         }
         ?>

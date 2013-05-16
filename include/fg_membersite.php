@@ -25,6 +25,7 @@ require_once("formvalidator.php");
 class FGMembersite {
 
     var $admin_email;
+    var $info_email;
     var $from_address;
     var $username;
     var $usertype;
@@ -38,7 +39,7 @@ class FGMembersite {
 
     //-----Initialization -------
     function FGMembersite() {
-        $this->sitename = 'crtbd.com';
+        $this->sitename = 'crtbd.org';
         $this->rand_key = '7EtqOGvPacaYdYp';
     }
 
@@ -52,6 +53,10 @@ class FGMembersite {
 
     function SetAdminEmail($email) {
         $this->admin_email = $email;
+    }
+    
+    function SetInfoEmail($email) {
+        $this->info_email = $email;
     }
 
     function SetWebsiteName($sitename) {
@@ -299,7 +304,7 @@ class FGMembersite {
 
         $host = $_SERVER['SERVER_NAME'];
 
-        $from = "nobody@$host";
+        $from = "noreply@$host";
         return $from;
     }
 
@@ -649,7 +654,35 @@ class FGMembersite {
         $mailer->Body = "A new user registered at " . $this->sitename . "\r\n" .
                 "Name: " . $formvars['name'] . "\r\n" .
                 "Email address: " . $formvars['email'] . "\r\n" .
-                "UserName: " . $formvars['username'];
+                "User Name: " . $formvars['username'];
+
+        if (!$mailer->Send()) {
+            return false;
+        }
+        return true;
+    }
+    
+    function SendEmailFromContact(&$formvars) {
+        if (empty($this->info_email)) {
+            return false;
+        }
+        $mailer = new PHPMailer();
+
+        $mailer->CharSet = 'utf-8';
+
+        $mailer->AddAddress($this->info_email);
+
+        $mailer->Subject = "Mail From Contact: " . $formvars['name'];
+
+        $mailer->From = $this->GetFromAddress();
+
+        $mailer->Body = $formvars['message'] . "\r\n" .
+                "\r\n --- \r\n" .
+                "Name: " . $formvars['name'] . "\r\n" .
+                "Email address: " . $formvars['email'] . "\r\n" .
+                "Contact Number: " . $formvars['contactnumber'] . "\r\n" .
+                "\r\n ---------------------------- \r\n" .
+                "This mail is sent via the contact page of " . $this->sitename . "\r\n";
 
         if (!$mailer->Send()) {
             return false;
