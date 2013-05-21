@@ -448,11 +448,13 @@ input {
 
 #main_content, #main_content2 {
     margin: 1px auto 6px auto;
+    border: 1px solid #808080;
     width: 568px;
-    min-height: 455%;
-    height: 455px;
+    min-height: 458px;
+    height: 100%;
     font-size: 14px;
     float: left;
+    overflow: auto;
 }
 
 #main_content2 {
@@ -461,9 +463,9 @@ input {
 
 #main_content .topic, #main_content2 .topic {
     margin: 0px auto 1px auto;
-    border: 1px solid #808080;
+    
     width: 98%;
-    height: auto;
+    height: 457px;
     overflow: auto;
 /*    -moz-border-radius: .5em .5em .5em .5em;
     -ms-border-radius: .5em .5em .5em .5em;

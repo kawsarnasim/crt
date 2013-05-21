@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 <div id="main_content" align="center">
-    
+
     <!-- Start of New Item Description -->
 
     <div style="width: 100%; margin: 5px 0px 10px 0px;">
@@ -13,7 +13,7 @@ include 'header.php';
         <div><button class="button" onclick="document.location='register.php'">Click Here</button></div>
     </div>
 
-    <div class="topic">
+    <div>
         <div class="topic_head">
             Training
         </div>
@@ -31,9 +31,9 @@ include 'header.php';
                 </tr>
             </table>
         </div>
-    </div>
 
-    <div class="topic" style="margin-top: 10px;">
+        <br /><br />
+
         <div class="topic_head">
             Research
         </div>
@@ -51,9 +51,9 @@ include 'header.php';
                 </tr>
             </table>
         </div>
-    </div>
-    
-     <div class="topic" style="margin-top: 10px;">
+
+        <br /><br />
+
         <div class="topic_head">
             Consultancy
         </div>
@@ -74,8 +74,8 @@ include 'header.php';
     </div>
 
 
-<!-- End of Main Content Area -->
+    <!-- End of Main Content Area -->
 
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>
