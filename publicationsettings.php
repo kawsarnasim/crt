@@ -3,7 +3,7 @@ include 'header2.php';
 ?>
 
 <div id="main_content2" align="center">
-    
+
     <div class="topic">
         <div class="topic_head">
             Publication Settings
@@ -14,6 +14,6 @@ include 'header2.php';
     </div>
 
 
-<?php
-include 'footer2.php';
-?>
+    <?php
+    include 'footer2.php';
+    ?>

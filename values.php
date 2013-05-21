@@ -10,16 +10,15 @@ if ($fgmembersite->CheckLogin()) {
 }
 
 include 'header2.php';
-
 ?>
 
 <div id="main_content" align="center">
-    
+
     <div class="topic">
         <div class="topic_head">
             Values
         </div>
-        
+
         <div class="topic_body">
             <p>These serve as guidelines for our conduct and behavior as we work towards our vision.</p>
             <ul>
@@ -34,6 +33,6 @@ include 'header2.php';
         </div>
     </div>
 
-<?php
+    <?php
     include 'footer.php';
-?>
+    ?>

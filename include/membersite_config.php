@@ -1,4 +1,5 @@
 <?PHP
+
 include("properties.php");
 require_once("./include/fg_membersite.php");
 
@@ -17,10 +18,9 @@ $fgmembersite->SetInfoEmail('info@crtbd.org');
 //hostname, user name, password, database name and table name
 //note that the script will create the table (for example, members in this case)
 //by itself on submitting register.php for the first time
-$fgmembersite->InitDB( $dbhost, $dbusername, $dbpwd, $dbname,  'users');
+$fgmembersite->InitDB($dbhost, $dbusername, $dbpwd, $dbname, 'users');
 
 //For better security. Get a random string from this link: http://tinyurl.com/randstr
 // and put it here
 $fgmembersite->SetRandomKey('qSRcVS6DrTzrPvr');
-
 ?>

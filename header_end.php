@@ -3,12 +3,12 @@
         <table><tr><td><span class=" icon ui-icon ui-icon-info"></span></td><td>This site is under construction</td></tr></table>
     </div>
     <div id="page_headersearch">
-        
+
         <form>
             <div>
                 <input type="text" class="searchtext" />
                 <input type="button" value="Search" class="button" onclick="search()"/>
-                
+
                 <div class="clearthis">&nbsp;</div>
             </div>
         </form>
@@ -44,7 +44,7 @@
 
         <div><a href="vacancy.php">Vacancy</a></div>
         <div><a href="photogallery.php">Photo Gallery</a></div>
-        
+
         <div><a href="downloads.php">Downloads</a></div>
         <?php
         if ($usertype == 1 || $usertype == 2) {
@@ -75,17 +75,17 @@
             <?php
         }
         ?>
-            
+
         <?php
         if (!$loggedin) {
             ?>
             <div class="last"><a href="login.php">Sign in</a></div>
-<!--            <input type="button" value="Login" class="button" onclick="login()"/>-->
+    <!--            <input type="button" value="Login" class="button" onclick="login()"/>-->
             <?php
         } else {
             ?>
             <div class="last"><a href="logout.php">Sign out</a></div>
-<!--            <input type="button" value="Logout" class="button" onclick="logout()"/>-->
+    <!--            <input type="button" value="Logout" class="button" onclick="logout()"/>-->
             <?php
         }
         ?>

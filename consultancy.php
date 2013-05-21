@@ -1,9 +1,9 @@
 <?php
-    include 'header2.php';
+include 'header2.php';
 ?>
 
 <div id="main_content" align="center">
-    
+
     <div class="topic">
         <div class="topic_head">
             Consultancy
@@ -14,6 +14,6 @@
         </div>
     </div>
 
-<?php
+    <?php
     include 'footer.php';
-?>
+    ?>

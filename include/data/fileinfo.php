@@ -36,7 +36,7 @@ class FileInfo {
     public function setSize($size) {
         $this->size = $size;
     }
-    
+
     public function getType() {
         return $this->type;
     }
@@ -52,7 +52,7 @@ class FileInfo {
     public function setLocation($location) {
         $this->location = $location;
     }
-    
+
     public function getUploadDateTime() {
         return $this->upload_date_time;
     }

@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="css/photoflash.css"/>
         <link rel="stylesheet" href="css/cupertino/jquery-ui-1.8.23.custom.css" />
-        
+
         <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
         <script src="js/jquery-ui-1.8.23.custom.min.js"></script>
         <script type="text/javascript" src="js/header-image-slide.js"></script>
@@ -89,7 +89,7 @@
 
                 <ul class="level1">
                     <li class="first"><a href="index.php">Home</a></li>
-<!--                    <li><a href="views/research.php">Research</a></li>-->
+                    <!--                    <li><a href="views/research.php">Research</a></li>-->
                     <li class="dropdown">
                         <a href="#">Research</a>
                         <ul class="page_menu_dropdown" style="position: absolute;display:none;">

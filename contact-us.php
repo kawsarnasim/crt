@@ -1,9 +1,9 @@
 <?php
-    include 'header2.php';
+include 'header2.php';
 ?>
 
 <div id="main_content" align="center">
-    
+
     <div class="topic">
         <div class="topic_head">
             Contact Us
@@ -24,12 +24,12 @@
                 <br/>Noyatola, Moghbazar,
                 <br/>Dhaka - 1217
                 <br/>Bangladesh.
-                
+
                 <br/>
-                
+
                 <br/>Malayasian Correspondent: +60143404972
                 <br/>
-                
+
                 <br/><b>Email: info@crtbd.org</b>
 
                 <br/><br/>We look forward to hearing from you.
@@ -38,6 +38,6 @@
         </div>
     </div>
 
-<?php
+    <?php
     include 'footer.php';
-?>
+    ?>

@@ -3,9 +3,9 @@ include 'header2.php';
 ?>
 
 <div id="main_content" align="center">
-    
+
     <?PHP
-    require_once("./include/membersite_config.php");
+    //require_once("./include/membersite_config.php");
 
     if (!$loggedin) {
         if (isset($_POST['submitted'])) {
@@ -54,7 +54,7 @@ include 'header2.php';
                 $(function() {
                     $("#username").focus();
                 });
-                    
+                        
                 // <![CDATA[
 
                 var frmvalidator  = new Validator("login");
@@ -78,6 +78,6 @@ include 'header2.php';
     }
     ?>
 
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>

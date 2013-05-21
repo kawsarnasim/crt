@@ -18,19 +18,19 @@
         <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css" />
         <script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
         <div id='fg_membersite_content'>
-<?php
-if ($success) {
-    ?>
+            <?php
+            if ($success) {
+                ?>
                 <h2>Password is Reset Successfully</h2>
                 Your new password is sent to your email address.
-    <?php
-} else {
-    ?>
+                <?php
+            } else {
+                ?>
                 <h2>Error</h2>
                 <span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span>
-    <?php
-}
-?>
+                <?php
+            }
+            ?>
         </div>
 
     </body>

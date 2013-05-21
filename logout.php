@@ -3,9 +3,9 @@ include 'header2.php';
 ?>
 
 <div id="main_content" align="center">
-    
+
     <?PHP
-    require_once("./include/membersite_config.php");
+    //require_once("./include/membersite_config.php");
 
     $fgmembersite->LogOut();
     ?>
@@ -16,6 +16,6 @@ include 'header2.php';
         <a href='login.php'>Login Again</a>
     </p>
 
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>

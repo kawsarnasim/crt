@@ -10,7 +10,6 @@ if ($fgmembersite->CheckLogin()) {
 }
 
 include 'header2.php';
-
 ?>
 
 <div id="main_content" align="center">
@@ -23,6 +22,6 @@ include 'header2.php';
         </div>
     </div>
 
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>

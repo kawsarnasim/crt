@@ -1,5 +1,6 @@
 <?php
-require_once("./include/membersite_config.php");
+include 'header2.php';
+
 $loggedin = FALSE;
 $usertype = 3;
 if ($fgmembersite->CheckLogin()) {
@@ -8,9 +9,6 @@ if ($fgmembersite->CheckLogin()) {
 } else {
     $usertype = 3;
 }
-
-include 'header2.php';
-
 ?>
 
 <div id="main_content" align="center">
@@ -22,8 +20,8 @@ include 'header2.php';
             Creating a better world by working for a richer economy.
         </div>
 
-    <br/>
-    
+        <br/>
+
         <div class="topic_head">
             Mission
         </div>

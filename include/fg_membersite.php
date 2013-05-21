@@ -54,7 +54,7 @@ class FGMembersite {
     function SetAdminEmail($email) {
         $this->admin_email = $email;
     }
-    
+
     function SetInfoEmail($email) {
         $this->info_email = $email;
     }
@@ -661,7 +661,7 @@ class FGMembersite {
         }
         return true;
     }
-    
+
     function SendEmailFromContact(&$formvars) {
         if (empty($this->info_email)) {
             return false;
