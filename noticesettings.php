@@ -2,7 +2,7 @@
 require_once("properties.php");
 require_once("./include/util/notice.php");
 require_once("./include/util/filemanager.php");
-
+include 'authenticate.php';
 include 'header2.php';
 ?>
 

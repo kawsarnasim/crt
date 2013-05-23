@@ -1,23 +1,19 @@
 <?php
-include 'header2.php';
-?>
-<!-- Start of Main Content Area -->
+include 'authenticate.php';
 
-<div id="main_content" align="center">
-
-    <?PHP
-//require_once("./include/membersite_config.php");
-
-    if (!$loggedin) {
-        if (isset($_POST['submitted'])) {
-            if ($fgmembersite->RegisterUser()) {
-                $fgmembersite->RedirectToURL("thank-you.php");
-            } else {
-                $fgmembersite->RedirectToURL("index.php");
-            }
-            exit;
+if (!$loggedin) {
+    if (isset($_POST['submitted'])) {
+        if ($fgmembersite->RegisterUser()) {
+            $fgmembersite->RedirectToURL("thank-you.php");
+        } else {
+            $fgmembersite->RedirectToURL("index.php");
         }
-        ?>
+        exit;
+    }
+    require_once 'header2.php';
+    ?>
+    <div id="main_content" align="center">
+
         <link rel="STYLESHEET" type="text/css" href="css/fg_membersite.css" />
         <script type='text/javascript' src='js/gen_validatorv31.js'></script>
         <link rel="STYLESHEET" type="text/css" href="css/pwdwidget.css" />
@@ -72,7 +68,7 @@ include 'header2.php';
                 // <![CDATA[
                 var pwdwidget = new PasswordWidget('thepwddiv','password');
                 pwdwidget.MakePWDWidget();
-                
+                    
                 var frmvalidator  = new Validator("register");
                 frmvalidator.EnableOnPageErrorDisplay();
                 frmvalidator.EnableMsgsTogether();
@@ -83,7 +79,7 @@ include 'header2.php';
                 frmvalidator.addValidation("email","email","Please provide a valid email address");
 
                 frmvalidator.addValidation("username","req","Please provide a username");
-                
+                    
                 frmvalidator.addValidation("password","req","Please provide a password");
 
                 // ]]>

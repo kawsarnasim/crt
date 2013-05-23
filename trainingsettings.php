@@ -1,7 +1,7 @@
 <?php
 require_once("properties.php");
 require_once("./include/util/training.php");
-
+include 'authenticate.php';
 include 'header2.php';
 ?>
 

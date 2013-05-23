@@ -1,4 +1,5 @@
 <?php
+include 'authenticate.php';
 include 'header2.php';
 ?>
 <?PHP

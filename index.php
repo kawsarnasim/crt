@@ -1,4 +1,5 @@
 <?php
+include 'authenticate.php';
 include 'header.php';
 ?>
 <div id="main_content" align="center">

@@ -1,14 +1,6 @@
 <?php
+include 'authenticate.php';
 include 'header2.php';
-
-$loggedin = FALSE;
-$usertype = 3;
-if ($fgmembersite->CheckLogin()) {
-    $usertype = $fgmembersite->UserType();
-    $loggedin = true;
-} else {
-    $usertype = 3;
-}
 ?>
 
 <div id="main_content" align="center">
